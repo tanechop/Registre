@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class Connexion extends JFrame{
     private JTextField champ1;
-    private JTextField champ2;
+    private JPasswordField champ2;
     private JButton bouton;
     private JButton bouton2;
     private JButton bouton3;
@@ -29,9 +29,10 @@ public class Connexion extends JFrame{
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(20, 5, 5, 20);
 
+
         gbc.gridx = 0; gbc.gridy = 0; gbc.weightx = 0.3;
         centre.add(new JLabel(" NOM:"),gbc);
-        gbc.gridx = 1; gbc.gridy = 0; gbc.weightx = 0.6;
+        gbc.gridx = 1; gbc.gridy = 0; gbc.weightx = 0.7;
         champ1 = new JTextField();
         centre.add(champ1,gbc);
 
@@ -75,9 +76,6 @@ public class Connexion extends JFrame{
         principale.add(centre, BorderLayout.CENTER);//afficher la page principale et la placerau centre du jframe de la page de connexion
 
     }
-
-
-
     public static void main(String[] args){
         SwingUtilities.invokeLater(() -> {
             new Connexion().setVisible(true);// Permet de rendre visible la page pageconnexion
