@@ -61,7 +61,7 @@ CREATE TABLE `visiteurs` (
   `id_Visiteurs` int(11) NOT NULL,
   `nom` varchar(45) DEFAULT NULL,
   `prenom` varchar(45) DEFAULT NULL,
-  `contact` int(11) DEFAULT NULL,
+  `contact` varchar(13) DEFAULT NULL,
   `num_CNI` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
