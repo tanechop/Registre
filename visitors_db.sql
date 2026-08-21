@@ -44,8 +44,8 @@ CREATE TABLE `visites` (
   `id_Visites` int(11) NOT NULL,
   `motif` varchar(45) DEFAULT NULL,
   `date_visite` datetime(3) DEFAULT NULL,
-  `heure_de_depart` datetime DEFAULT NULL,
-  `heure_d_arrivee` datetime DEFAULT NULL,
+  `heure_de_depart` time DEFAULT NULL,
+  `heure_d_arrivee` time DEFAULT NULL,
   `service` varchar(45) DEFAULT NULL,
   `Visiteurs_id_Visiteurs` int(11) NOT NULL,
   `Utilisateur_id_Utilisateur` int(11) NOT NULL
@@ -61,7 +61,7 @@ CREATE TABLE `visiteurs` (
   `id_Visiteurs` int(11) NOT NULL,
   `nom` varchar(45) DEFAULT NULL,
   `prenom` varchar(45) DEFAULT NULL,
-  `contact` int(11) DEFAULT NULL,
+  `contact` varchar(13) DEFAULT NULL,
   `num_CNI` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
