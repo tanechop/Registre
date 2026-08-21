@@ -1,3 +1,5 @@
+// Ce code ne sert que pour tester la connexion avec la base de données
+
 import java.sql.Connection;
 import java.sql.SQLException;
 
