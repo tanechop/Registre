@@ -65,6 +65,7 @@ CREATE TABLE `visiteurs` (
   `num_CNI` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO utilisateur (nom_d_utilisateur, mot_de_passe, role) VALUES ('firstAdmin', '$2a$10$DNMN1cWemRmELivXyevDmOOJwuGr0uZU390vgS7oD1GXOamCd1HyK', 'administrateur');
 --
 -- Indexes for dumped tables
 --
