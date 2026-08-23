@@ -1,24 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="13fcdbc0-1afe-4b10-adad-cd7813ca84c5" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/src/MotDePasseOublie.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/ReinitialisationMotDePasse.java" afterDir="false" />
+=======
+    <list default="true" id="e2791714-aa5e-44de-9558-b3884ff8a6a6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/RgistreUtilisateur.java" afterDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/data_sources_history.xml" beforeDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/.idea/libraries/jbcrypt_0_5.xml" beforeDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jbcrypt_0_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/jbcrypt_0_4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jbcrypt_0_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_j_9_7_0.xml" beforeDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/Register.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Registre.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Registre.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Authentification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Authentification.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Connexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Connexion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GenererHash.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GenererHash.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/visitors_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/visitors_db.sql" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/Register.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Register.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Registre.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Registre.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Connexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Connexion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GroupWare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GroupWare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserManagementFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserManagementFrame.java" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +55,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+<<<<<<< Updated upstream
   <component name="GitHubPullRequestSearchHistory"><![CDATA[{
   "lastFilter": {
     "state": "OPEN",
@@ -52,6 +73,84 @@
   "associatedIndex": 5
 }]]></component>
   <component name="ProjectId" id="3IJFmXlqPBlZchTyM07lgbcSzmQ" />
+=======
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;brand206&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/tanechop/Registre.git&quot;,
+    &quot;accountId&quot;: &quot;3ae38309-95b4-43c0-9c03-52bc50f18eeb&quot;
+  }
+}</component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="4.363999248198936E-283" />
+      <entry key="MS500" value="3.372693948734575E-57" />
+      <entry key="S2" value="7.620688910619883E-15" />
+      <entry key="S5" value="2.253189368286242E-6" />
+      <entry key="S10" value="0.0015010627462855248" />
+      <entry key="S30" value="0.11449845211348679" />
+      <entry key="S60" value="0.33837619910547573" />
+      <entry key="M2" value="0.581705773304819" />
+      <entry key="M5" value="0.8162620153509712" />
+      <entry key="M10" value="1.0462295039263085" />
+      <entry key="M15" value="1.2842354048523166" />
+      <entry key="M30" value="1.8057948518183295" />
+      <entry key="H1" value="2.2793131725587354" />
+      <entry key="H2" value="2.6634907064649282" />
+      <entry key="H4" value="5.027602099894434" />
+      <entry key="D1" value="63.92078268198052" />
+      <entry key="W1" value="114.16211957478133" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0" />
+      <entry key="S60" value="1.0" />
+      <entry key="M2" value="1.0" />
+      <entry key="M5" value="1.0" />
+      <entry key="M10" value="1.0" />
+      <entry key="M15" value="1.0" />
+      <entry key="M30" value="1.0000000000804325" />
+      <entry key="H1" value="1.0000419229028372" />
+      <entry key="H2" value="1.0326808041720994" />
+      <entry key="H4" value="1.9658747657479023" />
+      <entry key="D1" value="18.611335000419068" />
+      <entry key="W1" value="30.369793715207024" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="2.2646387745912308E-10" />
+      <entry key="MS500" value="0.011776053980924848" />
+      <entry key="S2" value="0.32941998793354255" />
+      <entry key="S5" value="0.6413594519116361" />
+      <entry key="S10" value="0.8023463723704353" />
+      <entry key="S30" value="1.0430805592873567" />
+      <entry key="S60" value="1.3019449810024921" />
+      <entry key="M2" value="1.563288311104905" />
+      <entry key="M5" value="1.8088412690270013" />
+      <entry key="M10" value="2.0425058699635077" />
+      <entry key="M15" value="2.281746993951012" />
+      <entry key="M30" value="2.804544974494759" />
+      <entry key="H1" value="3.2787276863617727" />
+      <entry key="H2" value="3.6958406365082874" />
+      <entry key="H4" value="6.993087902141696" />
+      <entry key="D1" value="82.5313993630163" />
+      <entry key="W1" value="144.5317444950676" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3IABD6sCZRo2u8zztJH1cDkG5u5" />
+>>>>>>> Stashed changes
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -59,17 +158,59 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Connexion.executor": "Run",
+<<<<<<< Updated upstream
+=======
+    "Application.Main.executor": "Run",
+>>>>>>> Stashed changes
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "kotlin-language-version-configured": "true",
+<<<<<<< Updated upstream
     "project.structure.last.edited": "Libraries",
+=======
+    "last_opened_file_path": "C:/Users/Achinele/Desktop/Registre",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/DELL/Desktop/PROJET GSA/Registre/src/Main.java",
+    "project.structure.last.edited": "SDKs",
+>>>>>>> Stashed changes
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2"
   }
 }]]></component>
+<<<<<<< Updated upstream
+=======
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Connexion" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Connexion" />
+      <module name="Register" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Registre" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Connexion" />
+      </list>
+    </recent_temporary>
+  </component>
+>>>>>>> Stashed changes
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -91,4 +232,29 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+<<<<<<< Updated upstream
+=======
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>3</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/Connexion.java</url>
+          <line>10</line>
+          <properties field="bouton3" class="Connexion" />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+>>>>>>> Stashed changes
 </project>
