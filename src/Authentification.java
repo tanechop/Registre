@@ -2,7 +2,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.sql.*;
 
 public class Authentification {
-    public String seConnecter(String username, String password) {
+    public String seConnecter(String username, String password) throws  SQLException {
         String role = null;
         String requete = "SELECT * FROM Utilisateur WHERE nom_d_utilisateur = ?";
 
@@ -17,8 +17,6 @@ public class Authentification {
                     role = resultat.getString("role");
                 }
             }
-        }catch (SQLException e){
-            System.out.println("Erreur de connexion"+e.getMessage());
         }
 
         return role;
