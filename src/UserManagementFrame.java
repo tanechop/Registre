@@ -17,8 +17,7 @@ import java.awt.*;
             setTitle("Gestion des utilisateurs");
             setSize(700, 500);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setLocationRelativeTo(null);
-
+            setLocationRelativeTo(null);// to center the frame
             // Ftitre de la page
             JPanel panel= new JPanel(new GridLayout(0, 1, 5, 5));
             panel.setBorder(BorderFactory.createEmptyBorder(5,10,0,0));
