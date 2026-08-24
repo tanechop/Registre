@@ -1,4 +1,3 @@
-import dao.VisiteDAO;
 import org.mindrot.jbcrypt.BCrypt;
 import java.sql.*;
 
@@ -11,10 +10,8 @@ public class GestionCompte {
         try(Connection connexion = ConnexionBD.getConnection();
         PreparedStatement statement = connexion.prepareStatement(requete)) {
             statement.setString(1, username);
-            statement.setString(2, password);
             statement.setString(3, role);
             statement.setString(4, question);
-            statement.setString(5, reponse);
             statement.executeUpdate();
         }
     }

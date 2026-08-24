@@ -7,5 +7,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< HEAD
+=======
+    <orderEntry type="library" name="jbcrypt-0.4" level="project" />
+>>>>>>> 37e4a21f0b9ab93ec6e7e75599005702f8e4cc8b
   </component>
 </module>

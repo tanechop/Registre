@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.sql.*;
 
 
 public class Connexion extends JFrame {
@@ -68,12 +69,39 @@ public class Connexion extends JFrame {
         Forgot.setForeground(Color.BLUE);
         Forgot.setCursor(new Cursor(Cursor.HAND_CURSOR));//Permet de pionter par un curseur le mot toucher
         centre.add(Forgot,gbc);
+        Forgot.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                new MotDePasseOublie().setVisible(true);
+            }
+        });
 
         //ajouter le stilkel juste,la croit,et retour a coter du bouton ok aver le code \u2713,\u2716,u21BB
         bouton = new JButton("<html><span style='color: #10b981; font-size: 10px; font-weight: bold;'>\u2713</span> OK</html>\"");
-        bouton2= new JButton("<html><span style='color: #dc2626; font-size: 10px;'>\u2716</span>Annuler</htmL");
-        bouton3= new JButton("<html><span style='color: #4b5563; font-size: 10px;'>\u21BB</span>Rénitialiser</html");
+        bouton.addActionListener(e -> {
+            String username = champ1.getText();
+            String password = new String(champ2.getPassword());
 
+            try {
+                String role =  Authentification.seConnecter(username, password);
+                if (role != null) {
+                    JOptionPane.showMessageDialog(this, "Connexion réussie ! Rôle : " + role);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nom d'utilisateur ou mot de passe incorrect.");
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Erreur de connexion à la base de données. Réessayez plus tard.");
+            }
+        });
+        bouton2= new JButton("<html><span style='color: #dc2626; font-size: 10px;'>\u2716</span>Annuler</htmL");
+        bouton2.addActionListener(e -> {
+            dispose();
+        });
+
+        bouton3= new JButton("<html><span style='color: #4b5563; font-size: 10px;'>\u21BB</span>Rénitialiser</html");
+        bouton3.addActionListener(e -> {
+            champ1.setText("");
+            champ2.setText("");
+        });
         //CREER un bloc nomme panelbouton qui vas contenir tout les boutons puis les ranges en ordre
         JPanel panelBoutons = new JPanel(new FlowLayout(FlowLayout.RIGHT, 4, 0));// PERMET DE RANGER LES BOUTONS DU COTE DROIT
         panelBoutons.setCursor(new Cursor(Cursor.HAND_CURSOR));

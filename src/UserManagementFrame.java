@@ -17,10 +17,20 @@ import java.awt.*;
             setTitle("Gestion des utilisateurs");
             setSize(700, 500);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setLocationRelativeTo(null);
-
+            setLocationRelativeTo(null);// to center the frame
             // Ftitre de la page
             JPanel panel= new JPanel(new GridLayout(0, 1, 5, 5));
+            panel.setBorder(BorderFactory.createEmptyBorder(5,10,0,0));
+            titre= new JLabel("GESTION DES COMPTES", SwingConstants.CENTER);
+            titre.setFont(new Font("COOPER BLACK", Font.BOLD, 28));
+            titre.setForeground(new Color(93, 129, 232, 255)); // Optionnel : couleur du texte
+           // 2. Ajouter une marge sous le titre (20px en bas)
+            titre.setBorder(BorderFactory.createEmptyBorder(5, 0, 10, 0));
+           // 3. L'ajouter en HAUT de votre panel principal
+            panel.add(titre, BorderLayout.NORTH);
+
+            // Ftitre de la page
+            JPanel panel1= new JPanel(new GridLayout(0, 1, 5, 5));
             panel.setBorder(BorderFactory.createEmptyBorder(5,10,0,0));
             titre= new JLabel("GESTION DES COMPTES", SwingConstants.CENTER);
             titre.setFont(new Font("COOPER BLACK", Font.BOLD, 28));
