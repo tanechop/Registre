@@ -1,4 +1,3 @@
-import dao.VisiteDAO;
 import org.mindrot.jbcrypt.BCrypt;
 import java.sql.*;
 
@@ -11,13 +10,25 @@ public class GestionCompte {
         try(Connection connexion = ConnexionBD.getConnection();
         PreparedStatement statement = connexion.prepareStatement(requete)) {
             statement.setString(1, username);
-            statement.setString(2, password);
+            statement.setString(2, hashMotDePasse);
             statement.setString(3, role);
             statement.setString(4, question);
-            statement.setString(5, reponse);
+            statement.setString(5, hashReponse);
             statement.executeUpdate();
         }
     }
 
+    public boolean supprimerCompte(String username){
+        String requete = "DELETE FROM utilisateur WHERE nom_d_utilisateur = ?";
 
+        try(Connection connexion = ConnexionBD.getConnection();
+        PreparedStatement statement = connexion.prepareStatement(requete)) {
+
+            statement.setString(1, username);
+            return statement.executeUpdate() > 0;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
