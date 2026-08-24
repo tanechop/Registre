@@ -5,7 +5,7 @@ import java.awt.*;
 public class Connexion extends JFrame {
 
     private JTextField champ1;
-    private JTextField champ2;
+    private JPasswordField champ2;
     private JButton bouton;
     private JButton bouton2;
     private JButton bouton3;
