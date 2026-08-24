@@ -72,7 +72,7 @@ ALTER TABLE utilisateur
     ADD COLUMN reponse_securite VARCHAR(60);
 
 UPDATE utilisateur
-SET question_securite = 'Quel est le nom de votre premier animal ?',
+SET question_securite = 'Quel est le nom de votre manga préféré ?',
     reponse_securite = '$2a$10$9Ir.WAf25Qwrbm8VAB32neVuoCoAS1CsNpLayPrPkMVZZisjSUnzW'
 WHERE nom_d_utilisateur = 'firstAdmin';
 --
