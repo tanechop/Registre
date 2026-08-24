@@ -30,7 +30,7 @@ public static void main(String[] args){
 
     // Création des 3 grands boutons cliquables
     JButton btnLancer = new JButton("Lancer l'application", iconPower);
-    JButton btnGestion = new JButton("Gestion des utilisateurs", iconUser);
+    JButton btnGestion = new JButton("Gestion des comptes utilisateurs", iconUser);
     JButton btnQuitter = new JButton("Fermer l'application", iconExit);
 
     // Alignement du texte et de l'icône à gauche avec un peu de marge
@@ -56,7 +56,7 @@ public static void main(String[] args){
     });
 
     btnGestion.addActionListener(e -> {
-        JOptionPane.showMessageDialog(page, "Ouverture de la gestion des utilisateurs...");
+        JOptionPane.showMessageDialog(page, "Ouverture de la gestion des comptes utilisatuers utilisateurs...");
     });
 
     btnQuitter.addActionListener(e -> {

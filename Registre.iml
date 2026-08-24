@@ -8,6 +8,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jbcrypt-0.4" level="project" />
+<<<<<<< Updated upstream
     <orderEntry type="library" name="mysql-connector-j-9.7.0" level="project" />
+=======
+>>>>>>> Stashed changes
   </component>
 </module>
