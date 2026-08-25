@@ -20,6 +20,7 @@ public class Main extends JFrame {
     private JTextField champ5;
     private JTextField champ6;
     private JTextArea champ7;
+    private JTextField champ8;
     private JButton bouton1;
     private JButton bouton2;
     private JButton bouton3;
@@ -27,7 +28,7 @@ public class Main extends JFrame {
 
     public Main() {
 
-        setSize(800, 720);
+        setSize(800, 760);
         setTitle("Enregistrement");
         setResizable(false);
         setLocationRelativeTo(null);
@@ -46,7 +47,7 @@ public class Main extends JFrame {
         titre.setBorder(BorderFactory.createEmptyBorder(0, 0, 30, 0));
         panelprincipale.add(titre, BorderLayout.NORTH);
 
-        JPanel panel = new JPanel(new GridLayout(8, 2, 0, 50));
+        JPanel panel = new JPanel(new GridLayout(9, 2, 0, 50));
         panel.setBackground(new Color(121, 142, 246));
 
         panel.add(new JLabel("<html>Nom <font color='red'>*</font> : </html>", SwingConstants.CENTER) {{
@@ -77,7 +78,7 @@ public class Main extends JFrame {
         panel.add(champ4);
         panel.add(new JLabel(""));
 
-        panel.add(new JLabel("<html>Heure d'arriver <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
+        panel.add(new JLabel("<html>Heure d'arrivée <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
             setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
         }});
         champ5 = new JTextField();
@@ -97,9 +98,16 @@ public class Main extends JFrame {
         champ7 = new JTextArea();
         champ7.setLineWrap(true);
         champ7.setWrapStyleWord(true);
-        JScrollPane scrollPane1 = new JScrollPane(champ7);
-       //champ7.setPreferredSize(new Dimension(100, 50));
+        //JScrollPane scrollPane1 = new JScrollPane(champ7);
+        //champ7.setPreferredSize(new Dimension(100, 50));
         panel.add(champ7);
+        panel.add(new JLabel(""));
+
+        panel.add(new JLabel("<html>Service solicité <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
+            setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
+        }});
+        champ8 = new JTextField();
+        panel.add(champ8);
         panel.add(new JLabel(""));
 
         panel.add(new JLabel(""));
@@ -140,7 +148,7 @@ public class Main extends JFrame {
                 boolean success = visiteDAO.enregistrerVisite(visite);
 
                 if (success) {
-                    JOptionPane.showMessageDialog(this, "Visiteur enregistr+� avec succ+�s !");
+                    JOptionPane.showMessageDialog(this, "Visiteur enregistré avec succés !");
                     champ1.setText("");
                     champ2.setText("");
                     champ3.setText("");
@@ -154,7 +162,7 @@ public class Main extends JFrame {
                 }
 
             } catch (NumberFormatException nfe) {
-                JOptionPane.showMessageDialog(this, "Le num+�ro de t+�l+�phone doit +�tre un nombre.",
+                JOptionPane.showMessageDialog(this, "Le numéro de téléphone doit étre un nombre.",
                         "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
             } catch (DateTimeParseException dtpe) {
                 JOptionPane.showMessageDialog(this, "Heure invalide. Utilisez le format HH:mm (ex: 14:30).",
