@@ -19,7 +19,7 @@ public class Main extends JFrame {
     private JTextField champ4;
     private JTextField champ5;
     private JTextField champ6;
-    private JTextField champ7;
+    private JTextArea champ7;
     private JButton bouton1;
     private JButton bouton2;
     private JButton bouton3;
@@ -56,21 +56,21 @@ public class Main extends JFrame {
         panel.add(champ1);
         panel.add(new JLabel(""));
 
-        panel.add(new JLabel("<html>Pr+®nom <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
+        panel.add(new JLabel("<html>PrÃ©nom <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
             setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
         }});
         champ2 = new JTextField();
         panel.add(champ2);
         panel.add(new JLabel(""));
 
-        panel.add(new JLabel("<html>N-¦CNI <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
+        panel.add(new JLabel("<html>NÂ°CNI <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
             setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
         }});
         champ3 = new JTextField();
         panel.add(champ3);
         panel.add(new JLabel(""));
 
-        panel.add(new JLabel("<html>N-¦T+¿l+¿phone <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
+        panel.add(new JLabel("<html>NÂ° TÃ©lÃ©phone <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
             setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
         }});
         champ4 = new JTextField();
@@ -84,7 +84,7 @@ public class Main extends JFrame {
         panel.add(champ5);
         panel.add(new JLabel(""));
 
-        panel.add(new JLabel("<html>Heure de depart <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
+        panel.add(new JLabel("<html>Heure de dÃ©part <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
             setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
         }});
         champ6 = new JTextField();
@@ -94,7 +94,11 @@ public class Main extends JFrame {
         panel.add(new JLabel("<html>Motif <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
             setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
         }});
-        champ7 = new JTextField();
+        champ7 = new JTextArea();
+        champ7.setLineWrap(true);
+        champ7.setWrapStyleWord(true);
+        JScrollPane scrollPane1 = new JScrollPane(champ7);
+       //champ7.setPreferredSize(new Dimension(100, 50));
         panel.add(champ7);
         panel.add(new JLabel(""));
 
@@ -127,7 +131,7 @@ public class Main extends JFrame {
                     return;
                 }
 
-                int utilisateurIdPlaceholder = 1; // TODO: remplacer par l'id de l'utilisateur connect+®
+                int utilisateurIdPlaceholder = 1; // TODO: remplacer par l'id de l'utilisateur connect+ï¿½
 
                 Visite visite = new Visite(motif, heureArrivee, heureDepart,
                         "", "", idVisiteur, utilisateurIdPlaceholder);
@@ -136,7 +140,7 @@ public class Main extends JFrame {
                 boolean success = visiteDAO.enregistrerVisite(visite);
 
                 if (success) {
-                    JOptionPane.showMessageDialog(this, "Visiteur enregistr+® avec succ+¿s !");
+                    JOptionPane.showMessageDialog(this, "Visiteur enregistr+ï¿½ avec succ+ï¿½s !");
                     champ1.setText("");
                     champ2.setText("");
                     champ3.setText("");
@@ -150,7 +154,7 @@ public class Main extends JFrame {
                 }
 
             } catch (NumberFormatException nfe) {
-                JOptionPane.showMessageDialog(this, "Le num+®ro de t+®l+®phone doit +¬tre un nombre.",
+                JOptionPane.showMessageDialog(this, "Le num+ï¿½ro de t+ï¿½l+ï¿½phone doit +ï¿½tre un nombre.",
                         "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
             } catch (DateTimeParseException dtpe) {
                 JOptionPane.showMessageDialog(this, "Heure invalide. Utilisez le format HH:mm (ex: 14:30).",

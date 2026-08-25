@@ -7,7 +7,8 @@ public class PageAcceuil extends JFrame {
     private DefaultTableModel tableModel;
     private JButton boutonhistorique ;
     private JButton buttonenregistrer;
-    private JButton buttondéconnection;
+    private JButton buttondeconnection;
+    private JButton buttonexpoeter;
     private JTable table;
     private JLabel titre;
 
@@ -24,7 +25,7 @@ public class PageAcceuil extends JFrame {
         //principale.setBackground(new Color(255, 255, 255, 255));
 
         JPanel paneltitre =new JPanel();
-        titre= new JLabel("Gestion des comptes", SwingConstants.CENTER);
+        titre= new JLabel("Accueil", SwingConstants.CENTER);
         titre.setFont(new Font("COOPER BLACK", Font.BOLD, 28));
         titre.setForeground(new Color(66, 72, 90, 244)); // Optionnel : couleur du texte
 
@@ -43,20 +44,23 @@ public class PageAcceuil extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
 
-         boutonhistorique = new JButton("<html><span style='color: #10b981; font-size: 10px; font-weight: bold;'>➕</span>  Enregistrer</html>\\");
+         boutonhistorique = new JButton("<html><span style='color: #10b981; font-size: 10px; font-weight: bold;'></span>  Enregistrer</html>\\");
         buttonenregistrer= new JButton("Historiques");
-        buttondéconnection=new JButton("Déconnecxion");
-        buttondéconnection.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        buttondeconnection=new JButton("Déconnecxion");
+        buttonexpoeter=new JButton("Exporter");
+        buttondeconnection.setCursor(new Cursor(Cursor.HAND_CURSOR));
         buttonenregistrer.setCursor(new Cursor(Cursor.HAND_CURSOR));
         boutonhistorique.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
+        buttonexpoeter.setCursor(new Cursor(Cursor.HAND_CURSOR));
         gbc.gridy = 0;
         panelGauche.add(buttonenregistrer, gbc);
 
         gbc.gridy = 1;
         panelGauche.add(boutonhistorique, gbc);
         gbc.gridy = 2;
-        panelGauche.add(buttondéconnection, gbc);
+        panelGauche.add(buttondeconnection, gbc);
+        gbc.gridy=3;
+        panelGauche.add(buttonexpoeter, gbc);
         add(panelGauche);
         panelGauche.setBackground(new Color(38, 124, 25, 255));
         add(panelGauche, BorderLayout.WEST);
@@ -80,7 +84,7 @@ public class PageAcceuil extends JFrame {
         add(principale);
 
 
-        paneltitre.setBackground(new Color(202, 111, 111, 255));
+        //paneltitre.setBackground(new Color(202, 111, 111, 255));
         //paneltitre.setOpaque(true);
         principale.add(paneltitre);
         setLocationRelativeTo(null);

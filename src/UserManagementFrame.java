@@ -9,7 +9,7 @@ public class UserManagementFrame extends JFrame {
     private DefaultTableModel tableModel;
     private JButton boutonhistorique ;
     private JButton buttonenregistrer;
-    private JButton buttondéconnection;
+    private JButton buttondeconnection;
     private JTable table;
     private JLabel titre;
 
@@ -47,8 +47,8 @@ public class UserManagementFrame extends JFrame {
 
         boutonhistorique = new JButton("Liste des comptes");
         buttonenregistrer= new JButton("<html><span style='color: #10b981; font-size: 10px; font-weight: bold;'></span> Nouveau compte</html>\\");
-        buttondéconnection=new JButton("\u21BB Retour á la page précédente");
-        buttondéconnection.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        buttondeconnection=new JButton("\u21BB Retour Ã  la page prÃ©cÃ©dente");
+        buttondeconnection.setCursor(new Cursor(Cursor.HAND_CURSOR));
         buttonenregistrer.setCursor(new Cursor(Cursor.HAND_CURSOR));
         boutonhistorique.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
@@ -58,7 +58,7 @@ public class UserManagementFrame extends JFrame {
         gbc.gridy = 1;
         panelGauche.add(boutonhistorique, gbc);
         gbc.gridy = 2;
-        panelGauche.add(buttondéconnection, gbc);
+        panelGauche.add(buttondeconnection, gbc);
         add(panelGauche);
         panelGauche.setBackground(new Color(38, 124, 25, 255));
         add(panelGauche, BorderLayout.WEST);
@@ -78,7 +78,7 @@ public class UserManagementFrame extends JFrame {
 
 
 
-        // 3. Ajout du panneau gauche +á la fen+¬tre principale
+        // 3. Ajout du panneau gauche +ï¿½ la fen+ï¿½tre principale
         add(principale);
         principale.add(paneltitre);
         setLocationRelativeTo(null);

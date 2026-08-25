@@ -25,7 +25,7 @@ public class Connexion extends JFrame {
         //permet de centralisser la page
         setLocationRelativeTo(null);
 
-// 2. Rendre le panel du formulaire transparent pour laisser para+«tre le fond
+// 2. Rendre le panel du formulaire transparent pour laisser para+ï¿½tre le fond
         titre= new JLabel("Connexion", SwingConstants.CENTER);
         titre.setFont(new Font("COOPER BLACK", Font.BOLD, 28));
         titre.setForeground(new Color(255, 255, 255, 255)); // Optionnel : couleur du texte
@@ -63,7 +63,7 @@ public class Connexion extends JFrame {
         gbc.gridy = 2;
         gbc.insets = new Insets(0, 5, 10, 20);
         centre.add(new JLabel(""),gbc);
-        JLabel Forgot = new JLabel("Mot de passe oubli+® ?");
+        JLabel Forgot = new JLabel("Mot de passe oubliÃ© ?");
         Forgot.setFont(new Font("BOOK Antiqua",Font.BOLD,14));
         Forgot.setForeground(Color.BLUE);
         Forgot.setCursor(new Cursor(Cursor.HAND_CURSOR));//Permet de pionter par un curseur le mot toucher
@@ -72,7 +72,7 @@ public class Connexion extends JFrame {
         //ajouter le stilkel juste,la croit,et retour a coter du bouton ok aver le code \u2713,\u2716,u21BB
         bouton = new JButton("<html><span style='color: #10b981; font-size: 10px; font-weight: bold;'>\u2713</span> OK</html>\"");
         bouton2= new JButton("<html><span style='color: #dc2626; font-size: 10px;'>\u2716</span>Annuler</htmL");
-        bouton3= new JButton("<html><span style='color: #4b5563; font-size: 10px;'>\u21BB</span>R+®nitialiser</html");
+        bouton3= new JButton("<html><span style='color: #4b5563; font-size: 10px;'>\u21BB</span>RÃ©nitialiser</html");
 
         //CREER un bloc nomme panelbouton qui vas contenir tout les boutons puis les ranges en ordre
         JPanel panelBoutons = new JPanel(new FlowLayout(FlowLayout.RIGHT, 4, 0));// PERMET DE RANGER LES BOUTONS DU COTE DROIT
@@ -84,7 +84,7 @@ public class Connexion extends JFrame {
         //panelBoutons.setBackground(new Color(121, 142, 246, 255));
 
         gbc.gridx = 0; gbc.gridy = 3;
-        gbc.gridwidth = 2; // +ëtendu sur les 2 colonnes
+        gbc.gridwidth = 2; // +ï¿½tendu sur les 2 colonnes
         gbc.insets = new Insets(10, 5,0,20);
 
         centre.add(new JLabel("")); // Espace vide dans la grille
