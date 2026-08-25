@@ -19,7 +19,7 @@ public class Main extends JFrame {
     private JTextField champ4;
     private JTextField champ5;
     private JTextField champ6;
-    private JTextField champ7;
+    private JTextArea champ7;
     private JButton bouton1;
     private JButton bouton2;
     private JButton bouton3;
@@ -70,7 +70,7 @@ public class Main extends JFrame {
         panel.add(champ3);
         panel.add(new JLabel(""));
 
-        panel.add(new JLabel("<html>N°Tèlèphone <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
+        panel.add(new JLabel("<html>N° Téléphone <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
             setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
         }});
         champ4 = new JTextField();
@@ -84,7 +84,7 @@ public class Main extends JFrame {
         panel.add(champ5);
         panel.add(new JLabel(""));
 
-        panel.add(new JLabel("<html>Heure de depart <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
+        panel.add(new JLabel("<html>Heure de départ <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
             setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
         }});
         champ6 = new JTextField();
@@ -94,7 +94,11 @@ public class Main extends JFrame {
         panel.add(new JLabel("<html>Motif <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
             setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
         }});
-        champ7 = new JTextField();
+        champ7 = new JTextArea();
+        champ7.setLineWrap(true);
+        champ7.setWrapStyleWord(true);
+        JScrollPane scrollPane1 = new JScrollPane(champ7);
+       //champ7.setPreferredSize(new Dimension(100, 50));
         panel.add(champ7);
         panel.add(new JLabel(""));
 
@@ -127,7 +131,7 @@ public class Main extends JFrame {
                     return;
                 }
 
-                int utilisateurIdPlaceholder = 1; // TODO: remplacer par l'id de l'utilisateur connecté
+                int utilisateurIdPlaceholder = 1; // TODO: remplacer par l'id de l'utilisateur connect+�
 
                 Visite visite = new Visite(motif, heureArrivee, heureDepart,
                         "", "", idVisiteur, utilisateurIdPlaceholder);
@@ -136,7 +140,7 @@ public class Main extends JFrame {
                 boolean success = visiteDAO.enregistrerVisite(visite);
 
                 if (success) {
-                    JOptionPane.showMessageDialog(this, "Visiteur enregistré avec succès !");
+                    JOptionPane.showMessageDialog(this, "Visiteur enregistr+� avec succ+�s !");
                     champ1.setText("");
                     champ2.setText("");
                     champ3.setText("");
@@ -150,7 +154,7 @@ public class Main extends JFrame {
                 }
 
             } catch (NumberFormatException nfe) {
-                JOptionPane.showMessageDialog(this, "Le numéro de téléphone doit être un nombre.",
+                JOptionPane.showMessageDialog(this, "Le num+�ro de t+�l+�phone doit +�tre un nombre.",
                         "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
             } catch (DateTimeParseException dtpe) {
                 JOptionPane.showMessageDialog(this, "Heure invalide. Utilisez le format HH:mm (ex: 14:30).",
