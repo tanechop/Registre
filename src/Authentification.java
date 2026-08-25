@@ -1,6 +1,6 @@
 import org.mindrot.jbcrypt.BCrypt;
-
 import java.sql.*;
+
 public class Authentification {
     public String seConnecter(String username, String password) {
         String role = null;

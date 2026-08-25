@@ -1,10 +1,8 @@
-
-import javax.swing.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-public class UserManagementFrame extends JFrame {
+public class PageAcceuil extends JFrame {
 
     private DefaultTableModel tableModel;
     private JButton boutonhistorique ;
@@ -14,21 +12,21 @@ public class UserManagementFrame extends JFrame {
     private JLabel titre;
 
 
-    private UserManagementFrame(){
+    private PageAcceuil(){
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 
         setTitle("page accueil");
-        setSize(1000,500);
+        setSize(900,500);
         //setLayout(new BorderLayout(10, 10));
         JPanel principale=new JPanel();
         //principale.setBackground(new Color(255, 255, 255, 255));
 
         JPanel paneltitre =new JPanel();
         titre= new JLabel("Gestion des comptes", SwingConstants.CENTER);
-        titre.setFont(new Font("COOPER BLACK", Font.BOLD, 25));
-        titre.setForeground(new Color(22, 73, 227, 255)); // Optionnel : couleur du texte
+        titre.setFont(new Font("COOPER BLACK", Font.BOLD, 28));
+        titre.setForeground(new Color(66, 72, 90, 244)); // Optionnel : couleur du texte
 
 
 // 2. Ajouter une marge sous le titre (20px en bas)
@@ -38,16 +36,16 @@ public class UserManagementFrame extends JFrame {
 
         JPanel panelGauche = new JPanel();
         panelGauche.setLayout(new GridBagLayout());
-        panelGauche.setPreferredSize(new Dimension(300, 0));
+        panelGauche.setPreferredSize(new Dimension(200, 0));
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
 
-        boutonhistorique = new JButton("Liste des comptes");
-        buttonenregistrer= new JButton("<html><span style='color: #10b981; font-size: 10px; font-weight: bold;'></span> Nouveau compte</html>\\");
-        buttondéconnection=new JButton("\u21BB Retour á la page précédente");
+         boutonhistorique = new JButton("Historique");
+        buttonenregistrer= new JButton("Enregistrer");
+        buttondéconnection=new JButton("Déconnecxion");
         buttondéconnection.setCursor(new Cursor(Cursor.HAND_CURSOR));
         buttonenregistrer.setCursor(new Cursor(Cursor.HAND_CURSOR));
         boutonhistorique.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -78,12 +76,16 @@ public class UserManagementFrame extends JFrame {
 
 
 
-        // 3. Ajout du panneau gauche +á la fen+¬tre principale
+        // 3. Ajout du panneau gauche +á la fenétre principale
         add(principale);
+
+
+        //paneltitre.setBackground(new Color(202, 111, 111, 255));
+        //paneltitre.setOpaque(true);
         principale.add(paneltitre);
         setLocationRelativeTo(null);
     }
     public static void main (String[] args){
-        SwingUtilities.invokeLater(() -> new UserManagementFrame().setVisible(true));
+        SwingUtilities.invokeLater(() -> new PageAcceuil().setVisible(true));
     }
 }

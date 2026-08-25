@@ -5,6 +5,8 @@ public class RgistreUtilisateur extends JFrame {
 
     private JTextField NOMUTILISATEUR;
     private JPasswordField motdepasse;
+    private JTextArea reponse;
+    private JTextArea Question;
     private JLabel titre ;
     private JRadioButton rbStandard;
     private JRadioButton rbSuperviseur;
@@ -16,9 +18,9 @@ public class RgistreUtilisateur extends JFrame {
 
     public RgistreUtilisateur(){
 
-        setTitle("CreÃ©r compte");
+        setTitle("Créer compte");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(700, 280);
+        setSize(700, 400);
         setLocationRelativeTo(null);
         setResizable(false);
 
@@ -40,11 +42,11 @@ public class RgistreUtilisateur extends JFrame {
         gbc.anchor = GridBagConstraints.NORTH;
         gbc.insets = new Insets(5, 0, 15, 50);
 
-        gbc.gridx = 0; gbc.gridy = 0; gbc.weightx = 0.2;
+        gbc.gridx = 0; gbc.gridy = 0; gbc.weightx = 0.3;
         JLabel nom=new  JLabel("<html>Nom d'utilisateur  <font color='red'>*</font>:</html>",SwingConstants.CENTER);
         nom.setFont(new Font("BOOK Antiqua",Font.BOLD,16));
         centre.add(nom,gbc);
-        gbc.gridx = 1; gbc.gridy = 0; gbc.weightx = 1;
+        gbc.gridx = 1; gbc.gridy = 0; gbc.weightx = 0.7;
         NOMUTILISATEUR = new JTextField();
         centre.add(NOMUTILISATEUR,gbc);
 
@@ -56,9 +58,9 @@ public class RgistreUtilisateur extends JFrame {
         motdepasse = new JPasswordField();//cree un interface de champ qui vas contenir le mot de passe saisir et le cripter
         centre.add(motdepasse,gbc);
 
-        // --- Ligne 2 : Choix du RÃ´le (Boutons Radio) ---
+        // --- Ligne 2 : Choix du R+¦le (Boutons Radio) ---
         gbc.gridx = 0; gbc.gridy = 2; gbc.weightx = 0.3;
-        JLabel lblRole = new JLabel("<html>RÃ´le  <font color='red'>*</font>:</html>", SwingConstants.CENTER);
+        JLabel lblRole = new JLabel("<html>Role  <font color='red'>*</font>:</html>", SwingConstants.CENTER);
         lblRole.setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
         centre.add(lblRole, gbc);
 
@@ -83,13 +85,37 @@ public class RgistreUtilisateur extends JFrame {
         gbc.gridx = 0; gbc.gridy = 3; gbc.weighty = 1.0;
         centre.add(new JLabel(""), gbc);
 
+        gbc.gridx = 0; gbc.gridy = 3; gbc.weightx = 0.3;
+        JLabel lblEmail = new JLabel("<html>Question de sécuritè  <font color='red'>*</font>:</html>", SwingConstants.RIGHT);
+        lblEmail.setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
+        centre.add(lblEmail, gbc);
+        gbc.gridx = 1; gbc.gridy = 3; gbc.weightx = 0.7;
+        Question= new JTextArea();
+        Question.setLineWrap(true);
+        Question.setWrapStyleWord(true);
+        JScrollPane scrollPane = new JScrollPane(Question);
+        //Question.setPreferredSize(new Dimension(100, 50));
+        centre.add(Question, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 4; gbc.weightx = 0.3;
+        JLabel lbrepose = new JLabel("<html>Réponse <font color='red'>*</font>:</html>", SwingConstants.RIGHT);
+        lbrepose.setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
+        centre.add(lbrepose, gbc);
+        gbc.gridx = 1; gbc.gridy = 4; gbc.weightx = 0.7;
+        reponse= new JTextArea();
+        reponse.setLineWrap(true);
+        reponse.setWrapStyleWord(true);
+        JScrollPane scrollPane1 = new JScrollPane(reponse);
+        //reponse.setPreferredSize(new Dimension(100, 50));
+        centre.add(reponse, gbc);
+
         add(principale);
         principale.add(centre,BorderLayout.CENTER);
 
         //gbc.gridx = 0; gbc.gridy = 4; gbc.weighty = 1.0;
         bouton = new JButton("<html><span style='color: #10b981; font-size: 10px; font-weight: bold;'>\u2713</span> OK</html>\"");
         bouton2= new JButton("<html><span style='color: #dc2626; font-size: 10px;'>\u2716</span> Annuler</htmL");
-        bouton3= new JButton("<html><span style='color: #4b5563; font-size: 10px;'>\u21BB</span> RÃ©initialiser</html");
+        bouton3= new JButton("<html><span style='color: #4b5563; font-size: 10px;'>\u21BB</span> Réinitialiser</html");
 
         //CREER un bloc nomme panelbouton qui vas contenir tout les boutons puis les ranges en ordre
         JPanel panelBoutons = new JPanel(new FlowLayout(FlowLayout.RIGHT, 4, 0));// PERMET DE RANGER LES BOUTONS DU COTE DROIT
