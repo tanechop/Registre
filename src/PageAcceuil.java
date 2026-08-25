@@ -7,7 +7,7 @@ public class PageAcceuil extends JFrame {
     private DefaultTableModel tableModel;
     private JButton boutonhistorique ;
     private JButton buttonenregistrer;
-    private JButton buttondéconnection;
+    private JButton buttondÃ©connection;
     private JTable table;
     private JLabel titre;
 
@@ -43,10 +43,10 @@ public class PageAcceuil extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
 
-         boutonhistorique = new JButton("Historique");
-        buttonenregistrer= new JButton("Enregistrer");
-        buttondéconnection=new JButton("Déconnecxion");
-        buttondéconnection.setCursor(new Cursor(Cursor.HAND_CURSOR));
+         boutonhistorique = new JButton("<html><span style='color: #10b981; font-size: 10px; font-weight: bold;'>âž•</span>  Enregistrer</html>\\");
+        buttonenregistrer= new JButton("Historiques");
+        buttondÃ©connection=new JButton("DÃ©connecxion");
+        buttondÃ©connection.setCursor(new Cursor(Cursor.HAND_CURSOR));
         buttonenregistrer.setCursor(new Cursor(Cursor.HAND_CURSOR));
         boutonhistorique.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
@@ -56,7 +56,7 @@ public class PageAcceuil extends JFrame {
         gbc.gridy = 1;
         panelGauche.add(boutonhistorique, gbc);
         gbc.gridy = 2;
-        panelGauche.add(buttondéconnection, gbc);
+        panelGauche.add(buttondÃ©connection, gbc);
         add(panelGauche);
         panelGauche.setBackground(new Color(38, 124, 25, 255));
         add(panelGauche, BorderLayout.WEST);
@@ -76,11 +76,11 @@ public class PageAcceuil extends JFrame {
 
 
 
-        // 3. Ajout du panneau gauche +á la fenétre principale
+        // 3. Ajout du panneau gauche Ã  la fenÃªtre principale
         add(principale);
 
 
-        //paneltitre.setBackground(new Color(202, 111, 111, 255));
+        paneltitre.setBackground(new Color(202, 111, 111, 255));
         //paneltitre.setOpaque(true);
         principale.add(paneltitre);
         setLocationRelativeTo(null);
