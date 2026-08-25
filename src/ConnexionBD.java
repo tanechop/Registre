@@ -2,7 +2,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConnexionBD {
+public class  ConnexionBD {
     private static final String url = "jdbc:mysql://localhost:3306/gestion_visiteurs";
     private static final String username = "root";
     private static final String password = "";
