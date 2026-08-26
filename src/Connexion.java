@@ -69,6 +69,11 @@ public class Connexion extends JFrame {
         Forgot.setForeground(Color.BLUE);
         Forgot.setCursor(new Cursor(Cursor.HAND_CURSOR));//Permet de pionter par un curseur le mot toucher
         centre.add(Forgot,gbc);
+        Forgot.addMouseListener(new java.awt.event.MouseAdapter(){
+            public void mouseClicked(java.awt.event.MouseEvent e){
+                new MotDePasseOublie().setVisible(true);
+            }
+        });
 
         //ajouter le stilkel juste,la croit,et retour a coter du bouton ok aver le code \u2713,\u2716,u21BB
         bouton = new JButton("<html><span style='color: #10b981; font-size: 10px; font-weight: bold;'>\u2713</span> OK</html>\"");
