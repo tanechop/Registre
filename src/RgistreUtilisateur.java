@@ -5,6 +5,8 @@ public class RgistreUtilisateur extends JFrame {
 
     private JTextField NOMUTILISATEUR;
     private JPasswordField motdepasse;
+    private JTextArea reponse;
+    private JTextArea Question;
     private JLabel titre ;
     private JRadioButton rbStandard;
     private JRadioButton rbSuperviseur;
@@ -18,7 +20,7 @@ public class RgistreUtilisateur extends JFrame {
 
         setTitle("Creér compte");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(700, 280);
+        setSize(700, 400);
         setLocationRelativeTo(null);
         setResizable(false);
 
@@ -82,6 +84,30 @@ public class RgistreUtilisateur extends JFrame {
 
         gbc.gridx = 0; gbc.gridy = 3; gbc.weighty = 1.0;
         centre.add(new JLabel(""), gbc);
+
+        gbc.gridx = 0; gbc.gridy = 3; gbc.weightx = 0.3;
+        JLabel lblEmail = new JLabel("<html>Question de sécuritè  <font color='red'>*</font>:</html>", SwingConstants.RIGHT);
+        lblEmail.setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
+        centre.add(lblEmail, gbc);
+        gbc.gridx = 1; gbc.gridy = 3; gbc.weightx = 0.7;
+        Question= new JTextArea();
+        Question.setLineWrap(true);
+        Question.setWrapStyleWord(true);
+        JScrollPane scrollPane = new JScrollPane(Question);
+        //Question.setPreferredSize(new Dimension(100, 50));
+        centre.add(Question, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 4; gbc.weightx = 0.2;
+        JLabel lbrepose = new JLabel("<html>Réponse <font color='red'>*</font>:</html>", SwingConstants.RIGHT);
+        lbrepose.setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
+        centre.add(lbrepose, gbc);
+        gbc.gridx = 1; gbc.gridy = 4; gbc.weightx = 0.7;
+        reponse= new JTextArea();
+        reponse.setLineWrap(true);
+        reponse.setWrapStyleWord(true);
+        JScrollPane scrollPane1 = new JScrollPane(reponse);
+        //reponse.setPreferredSize(new Dimension(100, 50));
+        centre.add(reponse, gbc);
 
         add(principale);
         principale.add(centre,BorderLayout.CENTER);

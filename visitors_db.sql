@@ -1,6 +1,6 @@
 -- phpMyAdmin SQL Dump
 -- version 5.2.0
--- https://www.phpmyadmin.net/
+-- https://www.phpmyadmin.net/+
 --
 -- Host: 127.0.0.1
 -- Generation Time: Aug 18, 2026 at 01:44 PM
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `utilisateur` (
   `id_Utilisateur` int(11) NOT NULL,
   `nom_d_utilisateur` varchar(45) NOT NULL,
-  `mot_de_passe` varchar(70) NOT NULL,
+  `mot_de_passe` varchar(45) NOT NULL,
   `role` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -65,16 +65,6 @@ CREATE TABLE `visiteurs` (
   `num_CNI` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO utilisateur (nom_d_utilisateur, mot_de_passe, role) VALUES ('firstAdmin', '$2a$10$DNMN1cWemRmELivXyevDmOOJwuGr0uZU390vgS7oD1GXOamCd1HyK', 'administrateur');
-
-ALTER TABLE utilisateur
-    ADD COLUMN question_securite VARCHAR(255),
-    ADD COLUMN reponse_securite VARCHAR(60);
-
-UPDATE utilisateur
-SET question_securite = 'Quel est le nom de votre manga préféré ?',
-    reponse_securite = '$2a$10$9Ir.WAf25Qwrbm8VAB32neVuoCoAS1CsNpLayPrPkMVZZisjSUnzW'
-WHERE nom_d_utilisateur = 'firstAdmin';
 --
 -- Indexes for dumped tables
 --
