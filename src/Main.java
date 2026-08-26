@@ -103,7 +103,7 @@ public class Main extends JFrame {
         panel.add(champ7);
         panel.add(new JLabel(""));
 
-        panel.add(new JLabel("<html>Service solicité <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
+        panel.add(new JLabel("<html>Service sollicité <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
             setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
         }});
         champ8 = new JTextField();

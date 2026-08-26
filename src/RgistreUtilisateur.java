@@ -87,7 +87,7 @@ public class RgistreUtilisateur extends JFrame {
         centre.add(new JLabel(""), gbc);
 
         gbc.gridx = 0; gbc.gridy = 3; gbc.weightx = 0.3;
-        JLabel lblEmail = new JLabel("<html>Question de sécuritè  <font color='red'>*</font>:</html>", SwingConstants.RIGHT);
+        JLabel lblEmail = new JLabel("<html>Question de sécuritè  <font color='red'>*</font>: </html>", SwingConstants.RIGHT);
         lblEmail.setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
         centre.add(lblEmail, gbc);
         gbc.gridx = 1; gbc.gridy = 3; gbc.weightx = 0.7;
