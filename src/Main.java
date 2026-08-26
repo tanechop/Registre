@@ -47,7 +47,7 @@ public class Main extends JFrame {
         titre.setBorder(BorderFactory.createEmptyBorder(0, 0, 30, 0));
         panelprincipale.add(titre, BorderLayout.NORTH);
 
-        JPanel panel = new JPanel(new GridLayout(9, 2, 0, 50));
+        JPanel panel = new JPanel(new GridLayout(9, 2, 0, 40));
         panel.setBackground(new Color(121, 142, 246));
 
         panel.add(new JLabel("<html>Nom <font color='red'>*</font> : </html>", SwingConstants.CENTER) {{
