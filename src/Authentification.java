@@ -4,7 +4,7 @@ import java.sql.*;
 public class Authentification {
     public  static  String seConnecter(String username, String password) throws  SQLException {
         String role = null;
-        String requete = "SELECT * FROM Utilisateur WHERE nom_d_utilisateur = ?";
+        String requete = "SELECT * FROM utilisateur WHERE nom_d_utilisateur = ?";
 
         try(Connection connexion = ConnexionBD.getConnection();
             PreparedStatement statement = connexion.prepareStatement(requete)){
