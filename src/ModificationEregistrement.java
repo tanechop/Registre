@@ -36,19 +36,19 @@ public class ModificationEregistrement extends JFrame {
     setBackground(Color.ORANGE);
 
     JPanel panelprincipale = new JPanel(new BorderLayout());
-        panelprincipale.setBorder(BorderFactory.createEmptyBorder(20, 10, 0, 0));
-        panelprincipale.setBackground(new Color(121, 142, 246));
+        panelprincipale.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+        panelprincipale.setBackground(new Color(93, 93, 103));
 
     titre = new JLabel(
                 "<html><span style='color: #10b981; font-size: 10px; font-weight: bold;background-color:blue'></span>Modification</html>",
                 SwingConstants.CENTER);
         titre.setFont(new Font("COOPER BLACK", Font.BOLD, 28));
-        titre.setForeground(new Color(122, 255, 101));
+        titre.setForeground(new Color(241, 243, 241));
         titre.setBorder(BorderFactory.createEmptyBorder(0, 0, 30, 0));
         panelprincipale.add(titre, BorderLayout.NORTH);
 
-    JPanel panel = new JPanel(new GridLayout(9, 2, 0, 50));
-        panel.setBackground(new Color(121, 142, 246));
+    JPanel panel = new JPanel(new GridLayout(9, 2, 0, 40));
+        panel.setBackground(new Color(180, 184, 193));
 
         panel.add(new JLabel("<html>Nom <font color='red'>*</font> : </html>", SwingConstants.CENTER) {{
         setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
@@ -112,7 +112,7 @@ public class ModificationEregistrement extends JFrame {
 
         panel.add(new JLabel(""));
 
-    bouton1 = new JButton("<html><span style='color: #10b981; font-size: 10px; font-weight: bold;'>\u2713</span> Validé</html>");
+    bouton1 = new JButton("<html><span style='color: #10b981; font-size: 10px; font-weight: bold;'>\u2713</span> Valider</html>");
     bouton2 = new JButton("<html><span style='color: #dc2626; font-size: 10px;'>\u2716</span> Annuler</html>");
     //bouton3 = new JButton("<html><span style='color: #4b5563; font-size: 10px;'>\u21BB</span>Retour</html>");
 
@@ -186,7 +186,7 @@ public class ModificationEregistrement extends JFrame {
         panelBoutons.add(bouton2,SwingConstants.CENTER);
         panelBoutons.add(bouton1, SwingConstants.CENTER);
         panelBoutons.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-        panelBoutons.setBackground(new Color(121, 142, 246));
+        panelBoutons.setBackground(new Color(180, 184, 193));
         panel.add(panelBoutons);
 
         panelprincipale.add(panel);

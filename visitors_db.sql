@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `utilisateur` (
   `id_Utilisateur` int(11) NOT NULL,
-  `nom_d_utilisateur` varchar(45) NOT NULL,
+  `nom_d_utilisateur` varchar(70) NOT NULL,
   `mot_de_passe` varchar(45) NOT NULL,
   `role` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -68,7 +68,11 @@ CREATE TABLE `visiteurs` (
 --
 -- Indexes for dumped tables
 --
+ALTER TABLE utilisateur
+    ADD COLUMN question_securite VARCHAR(255),
+    ADD COLUMN reponse_securite VARCHAR(70);
 
+INSERT INTO utilisateur(nom_d_utilisateur, mot_de_passe, role, question_securite, reponse_securite) VALUES ('firstAdmin', '$2a$10$DNMN1cWemRmELivXyevDmOOJwuGr0uZU390vgS7oD1GXOamCd1HyK', 'administrateur', 'Quel est le nom de votre manga préféré ?', '$2a$10$9Ir.WAf25Qwrbm8VAB32neVuoCoAS1CsNpLayPrPkMVZZisjSUnzW' );
 --
 -- Indexes for table `utilisateur`
 --
