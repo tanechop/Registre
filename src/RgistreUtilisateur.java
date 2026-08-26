@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 public class RgistreUtilisateur extends JFrame {
 
@@ -14,12 +15,12 @@ public class RgistreUtilisateur extends JFrame {
     private JButton bouton2;
     private JButton bouton3;
 
-
+    private GestionCompte gestionCompte = new GestionCompte();
 
     public RgistreUtilisateur(){
 
         setTitle("Creér compte");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(700, 400);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -66,7 +67,7 @@ public class RgistreUtilisateur extends JFrame {
 
         // Configuration des boutons radio
         rbStandard = new JRadioButton("Utilisateur Standard", true);
-        rbSuperviseur = new JRadioButton("Superviseur");
+        rbSuperviseur = new JRadioButton("Administrateur");
 
         rbStandard.setFont(new Font("BOOK Antiqua", Font.PLAIN, 14));
         rbSuperviseur.setFont(new Font("BOOK Antiqua", Font.PLAIN, 14));
@@ -114,9 +115,38 @@ public class RgistreUtilisateur extends JFrame {
 
         //gbc.gridx = 0; gbc.gridy = 4; gbc.weighty = 1.0;
         bouton = new JButton("<html><span style='color: #10b981; font-size: 10px; font-weight: bold;'>\u2713</span> OK</html>\"");
-        bouton2= new JButton("<html><span style='color: #dc2626; font-size: 10px;'>\u2716</span> Annuler</htmL");
-        bouton3= new JButton("<html><span style='color: #4b5563; font-size: 10px;'>\u21BB</span> Réinitialiser</html");
+        bouton.addActionListener(e ->{
+            String username = NOMUTILISATEUR.getText();
+            String password = new String(motdepasse.getPassword());
+            String role = rbStandard.isSelected() ? " utilisateur standard" : "administrateur";
+            String question = Question.getText();
+            String rep = reponse.getText() ;
 
+            if(username.isEmpty() || password.isEmpty() || question.isEmpty() || rep.isEmpty()){
+                JOptionPane.showMessageDialog(this, "Veuillez remplir tous les champs obligatoires.");
+                return;
+            }
+
+            try {
+                gestionCompte.creerCompte(username, password, role, question, rep);
+                JOptionPane.showMessageDialog(this, "Compte créé avec succès.");
+                dispose();
+            }catch (SQLException ex){
+                JOptionPane.showMessageDialog(this, "Erreur lors de la création du compte : "+ex.getMessage());
+            }
+        });
+
+        bouton2= new JButton("<html><span style='color: #dc2626; font-size: 10px;'>\u2716</span> Annuler</htmL");
+        bouton2.addActionListener(e ->{dispose();});
+
+        bouton3= new JButton("<html><span style='color: #4b5563; font-size: 10px;'>\u21BB</span> Réinitialiser</html");
+        bouton3.addActionListener(e ->{
+            NOMUTILISATEUR.setText("");
+            motdepasse.setText("");
+            Question.setText("");
+            reponse.setText("");
+            rbStandard.setSelected(true);
+        });
         //CREER un bloc nomme panelbouton qui vas contenir tout les boutons puis les ranges en ordre
         JPanel panelBoutons = new JPanel(new FlowLayout(FlowLayout.RIGHT, 4, 0));// PERMET DE RANGER LES BOUTONS DU COTE DROIT
         panelBoutons.setCursor(new Cursor(Cursor.HAND_CURSOR));
