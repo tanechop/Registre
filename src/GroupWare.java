@@ -1,71 +1,82 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class GroupWare {
+public class GroupWare extends JFrame{
+
     private static ImageIcon chrgerIcone(String path, int largeur, int hauteur) {
         java.net.URL imgURL = GroupWare.class.getResource(path);
         if (imgURL != null) {
             ImageIcon icon = new ImageIcon(imgURL);
             // Redimensionnement dynamique ici
-            Image img = icon.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+            Image img = icon.getImage().getScaledInstance(largeur, hauteur, Image.SCALE_SMOOTH);
             return new ImageIcon(img);
         } else {
             System.err.println("Image introuvable : " + path);
             return null;
         }
     }
-public static void main(String[] args){
-    JFrame page = new JFrame("Groupware");
-    page.setSize(500, 300);
-    page.setLocationRelativeTo(null);
-    page.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    // Panneau principal divisé en 3 lignes de même taille
-    JPanel menu = new JPanel(new GridLayout(3, 1, 5, 5));
+    public GroupWare() {
+        setTitle("Groupware");
+        setSize(550, 380);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JLabel titre = new JLabel("Groupware", SwingConstants.CENTER);
+        titre.setFont(new Font("COOPER BLACK", Font.BOLD, 24));
+        titre.setForeground(new Color(22, 73, 227, 255));
+        titre.setBorder(BorderFactory.createEmptyBorder(15, 0, 10, 0));
 
-    // Chargement des icônes (remplacez par vos chemins d'accès)
-    ImageIcon iconPower = chrgerIcone("/images/images.png",50,50);
-    ImageIcon iconUser  = chrgerIcone("/images/9187604.png",50,50);
-    ImageIcon iconExit  = chrgerIcone("/images/quitter7.png",50,50);
+        JPanel menu = new JPanel(new GridLayout(3, 1, 1, 5));
+        menu.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-    // Création des 3 grands boutons cliquables
-    JButton btnLancer = new JButton("Lancer l'application", iconPower);
-    JButton btnGestion = new JButton("Gestion des comptes utilisateurs", iconUser);
-    JButton btnQuitter = new JButton("Fermer l'application", iconExit);
+        ImageIcon iconPower = chrgerIcone("/images/images.png", 50, 50);
+        ImageIcon iconUser = chrgerIcone("/images/9187604.png", 50, 50);
+        ImageIcon iconExit = chrgerIcone("/images/quitter7.png", 50, 50);
 
-    // Alignement du texte et de l'icône à gauche avec un peu de marge
-    btnLancer.setHorizontalAlignment(SwingConstants.LEFT);
-    btnGestion.setHorizontalAlignment(SwingConstants.LEFT);
-    btnQuitter.setHorizontalAlignment(SwingConstants.LEFT);
+        JButton btnLancer = new JButton("Lancer l'application", iconPower);
+        JButton btnGestion = new JButton("Gérer les comptes", iconUser);
+        JButton btnQuitter = new JButton("Fermer l'application", iconExit);
 
-    // Style pour agrandir le texte et ajouter de l'espace interne (padding)
-    Font policeTexte = new Font("BOOK Antique", Font.BOLD, 20);
+        btnLancer.setHorizontalAlignment(SwingConstants.LEFT);
+        btnGestion.setHorizontalAlignment(SwingConstants.LEFT);
+        btnQuitter.setHorizontalAlignment(SwingConstants.LEFT);
 
-    JButton[] boutons = {btnLancer, btnGestion, btnQuitter};// FONCTION qui gere les boutons
-    for (JButton btn : boutons) {
-        btn.setFont(policeTexte);
-        btn.setIconTextGap(20); // Espace entre l'icône et le texte
-        btn.setFocusPainted(false); // Enlève la bordure de sélection autour du texte
-        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        menu.add(btn);
+        Font policeTexte = new Font("BOOK ANTIQUE", Font.BOLD, 20);
+
+        JButton[] boutons = {btnLancer, btnGestion, btnQuitter};
+        for (JButton btn : boutons) {
+            btn.setFont(policeTexte);
+            btn.setIconTextGap(20);
+            btn.setFocusPainted(false);
+            btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            btn.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createLineBorder(new Color (220, 220, 220), 1),
+                    BorderFactory.createEmptyBorder(10, 15, 10, 15)
+            ));
+            btn.setBackground(Color.WHITE);
+            btn.setOpaque(true);
+            menu.add(btn);
+        }
+
+        btnLancer.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, "Lancement de l'application");
+        });
+
+        btnGestion.addActionListener(e -> {
+            new UserManagementFrame().setVisible(true);
+            dispose();
+        });
+
+        btnQuitter.addActionListener(e -> {
+            System.exit(0);
+        });
+
+        add(titre, BorderLayout.NORTH);
+        add(menu, BorderLayout.CENTER);
+        setResizable(false);
     }
-
-    // Actions au clic sur les boutons
-    btnLancer.addActionListener(e -> {
-        JOptionPane.showMessageDialog(page, "Lancement de l'application...");
-    });
-
-    btnGestion.addActionListener(e -> {
-        JOptionPane.showMessageDialog(page, "Ouverture de la gestion des comptes utilisatuers utilisateurs...");
-    });
-
-    btnQuitter.addActionListener(e -> {
-        System.exit(0);
-    });
-
-    page.add(menu);
-    page.setResizable(false);
-    page.setVisible(true);
+    public static void main(String[] args){
+        SwingUtilities.invokeLater(() -> new GroupWare().setVisible(true));
 }
 
 }

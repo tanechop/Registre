@@ -82,8 +82,13 @@ public class Connexion extends JFrame {
             String password = new String(champ2.getPassword());
             try{
                 String role = Authentification.seConnecter(username, password);
-                if(role!=null){
-                    JOptionPane.showMessageDialog(this, "Connexion réussie ! Rôle : "+role);
+                if(role!=null) {
+                    if ("administrateur".equals(role)) {
+                        new GroupWare().setVisible(true);
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Connexion réussie ! Rôle : " + role);
+                    }
                 }else {
                     JOptionPane.showMessageDialog(this, "Nom d'utilisateur ou mot de passe incorrect.");
                 }
@@ -130,3 +135,4 @@ public class Connexion extends JFrame {
 
     }
 }
+
