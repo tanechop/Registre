@@ -99,14 +99,25 @@ public class UserManagementFrame extends JFrame {
 
         setLocationRelativeTo(null);
     }
+
+    private static JButton creerBoutonAction(String symbole, Color couleur) {
+        JButton bouton = new JButton(symbole);
+        bouton.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 16));
+        bouton.setForeground(couleur);
+        bouton.setBorderPainted(false);
+        bouton.setContentAreaFilled(false);
+        bouton.setFocusPainted(false);
+        bouton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        return bouton;
+    }
     public static class BoutonsRenderer extends JLabel implements TableCellRenderer {
         private JButton boutonModifier;
         private JButton boutonSupprimer;
 
         public BoutonsRenderer(){
             setLayout(new FlowLayout(FlowLayout.CENTER, 5, 0));
-            boutonModifier = new JButton("✏");
-            boutonSupprimer = new JButton("🗑");
+            boutonModifier = creerBoutonAction("✏", new Color(37, 99, 235));
+            boutonSupprimer = creerBoutonAction("🗑", new Color(220, 38, 38));
             add(boutonModifier);
             add(boutonSupprimer);
         }
@@ -125,8 +136,8 @@ public class UserManagementFrame extends JFrame {
 
         public BoutonsEditor(){
             panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
-            boutonModifier = new JButton("✏");
-            boutonSupprimer = new JButton("🗑");
+            boutonModifier = creerBoutonAction("✏", new Color(37, 99, 235));
+            boutonSupprimer = creerBoutonAction("🗑", new Color(220, 38, 38));
 
             boutonModifier.addActionListener(e -> {
                 fireEditingStopped();
