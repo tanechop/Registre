@@ -115,6 +115,8 @@ public class Main extends JFrame {
         bouton1 = new JButton("<html><span style='color: #10b981; font-size: 10px; font-weight: bold;'>\u2713</span> ok</html>");
         bouton2 = new JButton("<html><span style='color: #dc2626; font-size: 10px;'>\u2716</span>Annuler</html>");
         bouton3 = new JButton("<html><span style='color: #4b5563; font-size: 10px;'>\u21BB</span>Retour</html>");
+        bouton3.addActionListener(e -> {
+        dispose();});
 
         bouton1.addActionListener(e -> {
             try {
