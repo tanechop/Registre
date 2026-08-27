@@ -87,7 +87,8 @@ public class Connexion extends JFrame {
                         new GroupWare().setVisible(true);
                         dispose();
                     } else {
-                        JOptionPane.showMessageDialog(this, "Connexion réussie ! Rôle : " + role);
+                        new PageAccueil("utilisateurtest").setVisible(true);
+                        dispose();
                     }
                 }else {
                     JOptionPane.showMessageDialog(this, "Nom d'utilisateur ou mot de passe incorrect.");

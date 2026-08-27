@@ -215,7 +215,7 @@ public class PageAccueil extends JFrame {
                         rs.getString("nom"),
                         rs.getString("prenom"),
                         rs.getInt("contact"),
-                        rs.getInt("num_CNI"),
+                        rs.getString("num_CNI"),
                         rs.getString("motif"),
                         rs.getDate("date_visite"),
                         rs.getTime("heure_d_arrivee"),
