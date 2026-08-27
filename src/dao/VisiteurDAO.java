@@ -42,4 +42,25 @@ public class VisiteurDAO {
             return -1;
         }
     }
+    public boolean modifierVisiteur(Visiteur visiteur) {
+        String sql = "UPDATE Visiteurs SET nom=?, prenom=?, contact=?, num_CNI=? WHERE id_Visiteurs=?";
+
+        try (
+                Connection connection = DatabaseConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)
+        ) {
+            statement.setString(1, visiteur.getNom());
+            statement.setString(2, visiteur.getPrenom());
+            statement.setInt(3, visiteur.getContact());
+            statement.setString(4, visiteur.getNumCni());
+            statement.setInt(5, visiteur.getIdVisiteur());
+
+            return statement.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

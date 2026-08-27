@@ -38,5 +38,29 @@ public class VisiteDAO {
             e.printStackTrace();
             return false;
         }
+    }public boolean modifierVisite(Visite visite) {
+        String sql = """
+        UPDATE Visites
+        SET motif=?, heure_d_arrivee=?, heure_de_depart=?, service=?
+        WHERE id_Visites=?
+        """;
+
+        try (
+                Connection connection = DatabaseConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)
+        ) {
+            statement.setString(1, visite.getMotif());
+            statement.setTimestamp(2, Timestamp.valueOf(visite.getHeureDArrivee()));
+            statement.setTimestamp(3, Timestamp.valueOf(visite.getHeureDeDepart()));
+            statement.setString(4, visite.getService());
+            statement.setInt(5, visite.getIdVisite());
+
+            return statement.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
+
 }

@@ -9,5 +9,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jbcrypt-0.4" level="project" />
     <orderEntry type="library" name="mysql-connector-j-9.7.0" level="project" />
+    <orderEntry type="library" name="itextpdf-5.5.13.3" level="project" />
+    <orderEntry type="library" name="itextpdf-5.5.13.4" level="project" />
+    <orderEntry type="library" name="mysql-connector-j-9.7.1" level="project" />
   </component>
 </module>
