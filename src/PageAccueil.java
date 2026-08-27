@@ -73,17 +73,18 @@ public class PageAccueil extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
 
-        JButton buttonHistorique = new JButton("Historiques");
+        JButton buttonHistorique = new JButton("Historique");
         buttonHistorique.addActionListener(e -> {
             recherchePanel.setVisible(true);
             exportPanel.setVisible(true);
             afficherHistorique();
         });
 
-        JButton buttonEnregistrer = new JButton("Enregistrer");
+        JButton buttonEnregistrer = new JButton("Nouvel Visite");
         buttonEnregistrer.addActionListener(e -> new Main());
         JButton buttonDeconnexion = new JButton("Déconnexion");
-        buttonDeconnexion.addActionListener(e -> dispose());
+        buttonDeconnexion.addActionListener(e -> {new Connexion().setVisible(true);
+        dispose();});
 
         gbc.gridy = 0; panelGauche.add(buttonHistorique, gbc);
         gbc.gridy = 1; panelGauche.add(buttonEnregistrer, gbc);
