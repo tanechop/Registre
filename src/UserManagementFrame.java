@@ -22,12 +22,12 @@ public class UserManagementFrame extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        setTitle("page accueil");
+        setTitle("Page accueil");
         setSize(1000,500);
 
         titre= new JLabel("Gestion des comptes", SwingConstants.CENTER);
         titre.setFont(new Font("COOPER BLACK", Font.BOLD, 25));
-        titre.setForeground(new Color(22, 73, 227, 255)); // Optionnel : couleur du texte
+        titre.setForeground(StyleUI.MARINE); // Optionnel : couleur du texte
 
 
 // 2. Ajouter une marge sous le titre (20px en bas)
@@ -44,6 +44,7 @@ public class UserManagementFrame extends JFrame {
         gbc.gridx = 0;
 
         boutonhistorique = new JButton("Liste des comptes");
+        boutonhistorique.setFont(StyleUI.POLICE_BOUTON);
         boutonhistorique.addActionListener(e -> {
             tableModel.setRowCount(0);
             try {
@@ -58,11 +59,13 @@ public class UserManagementFrame extends JFrame {
         });
 
         buttonenregistrer= new JButton("<html><span style='color: #10b981; font-size: 10px; font-weight: bold;'></span> Nouveau compte</html>\\");
+        buttonenregistrer.setFont(StyleUI.POLICE_BOUTON);
         buttonenregistrer.addActionListener(e -> {
             new RgistreUtilisateur().setVisible(true);
         });
 
-        buttondeconnection=new JButton("\u21BB Retour à la page précédente");
+        buttondeconnection=new JButton("\u21BB Retour");
+        buttondeconnection.setFont(StyleUI.POLICE_BOUTON);
         buttondeconnection.addActionListener(e -> {
             new GroupWare().setVisible(true);
             dispose();
@@ -79,11 +82,22 @@ public class UserManagementFrame extends JFrame {
         gbc.gridy = 2;
         panelGauche.add(buttondeconnection, gbc);
         add(panelGauche);
-        panelGauche.setBackground(new Color(38, 124, 25, 255));
+        panelGauche.setBackground(StyleUI.MARINE);
         add(panelGauche, BorderLayout.WEST);
 
         tableModel = new DefaultTableModel(new String[]{"Nom d'utilisateur", "Role", "Actions"}, 0);
-        JPanel panelCentre = new JPanel(new BorderLayout());
+        JPanel panelCentre = new JPanel(new BorderLayout()) {
+            private final Image logo = new ImageIcon(getClass().getResource("/images/logo global 2.0.jpg")).getImage();
+
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.08f));
+                g2.drawImage(logo, 0, 0, getWidth(), getHeight(), this);
+                g2.dispose();
+            }
+        };
         panelCentre.add(titre,BorderLayout.NORTH);
         table = new JTable(tableModel);
         table.getColumnModel().getColumn(2).setCellRenderer(new BoutonsRenderer());
@@ -96,6 +110,8 @@ public class UserManagementFrame extends JFrame {
         panelCentre.add(scrollPane, BorderLayout.CENTER);
 
         add(panelCentre, BorderLayout.CENTER);
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setOpaque(false);
 
         setLocationRelativeTo(null);
     }
@@ -134,7 +150,10 @@ public class UserManagementFrame extends JFrame {
                 fireEditingStopped();
                 String ancienNom = (String) table.getValueAt(currentRow, 0);
                 String roleactuel = (String) table.getValueAt(currentRow, 1);
-
+                if("administrateur".equals(roleactuel)){
+                    JOptionPane.showMessageDialog(UserManagementFrame.this, "Vous ne pouvez pas modifier le compte d'un administrateur");
+                    return;
+                }
                 JTextField champNom = new JTextField(ancienNom);
                 String[] roles = {"utilisateur standard", "administrateur"};
                 JComboBox<String> champRole = new JComboBox<>(roles);
