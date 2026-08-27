@@ -59,7 +59,9 @@ public class GroupWare extends JFrame{
         }
 
         btnLancer.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Lancement de l'application");
+            new PageAccueil("UtilisateurTest").setVisible(true);
+            dispose();
+
         });
 
         btnGestion.addActionListener(e -> {
