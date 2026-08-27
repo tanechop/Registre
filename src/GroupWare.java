@@ -17,13 +17,13 @@ public class GroupWare extends JFrame{
     }
 
     public GroupWare() {
-        setTitle("Groupware");
+        setTitle("Menu administrateur");
         setSize(550, 380);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JLabel titre = new JLabel("Groupware", SwingConstants.CENTER);
         titre.setFont(new Font("COOPER BLACK", Font.BOLD, 24));
-        titre.setForeground(new Color(22, 73, 227, 255));
+        titre.setForeground(StyleUI.MARINE);
         titre.setBorder(BorderFactory.createEmptyBorder(15, 0, 10, 0));
 
         JPanel menu = new JPanel(new GridLayout(3, 1, 1, 5));
@@ -41,7 +41,7 @@ public class GroupWare extends JFrame{
         btnGestion.setHorizontalAlignment(SwingConstants.LEFT);
         btnQuitter.setHorizontalAlignment(SwingConstants.LEFT);
 
-        Font policeTexte = new Font("BOOK ANTIQUE", Font.BOLD, 20);
+        Font policeTexte = StyleUI.POLICE_BOUTON.deriveFont(20f);
 
         JButton[] boutons = {btnLancer, btnGestion, btnQuitter};
         for (JButton btn : boutons) {
@@ -49,10 +49,23 @@ public class GroupWare extends JFrame{
             btn.setIconTextGap(20);
             btn.setFocusPainted(false);
             btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            btn.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createLineBorder(new Color (220, 220, 220), 1),
-                    BorderFactory.createEmptyBorder(10, 15, 10, 15)
-            ));
+            btnLancer.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createMatteBorder(0, 4, 0, 0, StyleUI.CYAN),
+                    BorderFactory.createCompoundBorder(
+                            BorderFactory.createLineBorder(StyleUI.GRIS_BORDURE, 1),
+                            BorderFactory.createEmptyBorder(10, 15, 10, 11))));
+
+            btnGestion.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createMatteBorder(0, 4, 0, 0, StyleUI.VERT),
+                    BorderFactory.createCompoundBorder(
+                            BorderFactory.createLineBorder(StyleUI.GRIS_BORDURE, 1),
+                            BorderFactory.createEmptyBorder(10, 15, 10, 11))));
+
+            btnQuitter.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createMatteBorder(0, 4, 0, 0, StyleUI.MARINE),
+                    BorderFactory.createCompoundBorder(
+                            BorderFactory.createLineBorder(StyleUI.GRIS_BORDURE, 1),
+                            BorderFactory.createEmptyBorder(10, 15, 10, 11))));
             btn.setBackground(Color.WHITE);
             btn.setOpaque(true);
             menu.add(btn);

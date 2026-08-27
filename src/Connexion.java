@@ -77,6 +77,7 @@ public class Connexion extends JFrame {
 
         //ajouter le stilkel juste,la croit,et retour a coter du bouton ok aver le code \u2713,\u2716,u21BB
         bouton = new JButton("<html><span style='color: #10b981; font-size: 10px; font-weight: bold;'>\u2713</span> OK</html>\"");
+        bouton.setFont(StyleUI.POLICE_BOUTON);
         bouton.addActionListener(e -> {
             String username = champ1.getText();
             String password = new String(champ2.getPassword());
@@ -87,7 +88,8 @@ public class Connexion extends JFrame {
                         new GroupWare().setVisible(true);
                         dispose();
                     } else {
-                        JOptionPane.showMessageDialog(this, "Connexion réussie ! Rôle : " + role);
+                        new PageAccueil("utilisateurtest").setVisible(true);
+                        dispose();
                     }
                 }else {
                     JOptionPane.showMessageDialog(this, "Nom d'utilisateur ou mot de passe incorrect.");
@@ -98,11 +100,13 @@ public class Connexion extends JFrame {
         });
 
         bouton2= new JButton("<html><span style='color: #dc2626; font-size: 10px;'>\u2716</span>Annuler</htmL");
+        bouton2.setFont(StyleUI.POLICE_BOUTON);
         bouton2.addActionListener(e -> {
             dispose();
         });
 
         bouton3= new JButton("<html><span style='color: #4b5563; font-size: 10px;'>\u21BB</span>Réinitialiser</html");
+        bouton3.setFont(StyleUI.POLICE_BOUTON);
         bouton3.addActionListener(e -> {
             champ1.setText("");
             champ2.setText("");

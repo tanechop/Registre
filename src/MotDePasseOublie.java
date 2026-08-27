@@ -22,6 +22,7 @@ public class MotDePasseOublie extends JFrame {
 
         cardLayout = new CardLayout();
         panelPrincipal = new JPanel(cardLayout);
+        panelPrincipal.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         panelPrincipal.add(creerEcranUsername(), "ECRAN_USERNAME");
         panelPrincipal.add(creerEcranQuestion(), "ECRAN_QUESTION");
         panelPrincipal.add(creerEcranNouveauMotDePasse(), "ECRAN_NOUVEAU_MDP");
@@ -36,7 +37,9 @@ public class MotDePasseOublie extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 0;
-        panel.add(new JLabel("Nom d'utilisateur :"), gbc);
+        JLabel labelNom = new JLabel("Nom d'utilisateur :");
+        labelNom.setFont(StyleUI.POLICE_LABEL);
+        panel.add(labelNom, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 0;
@@ -47,6 +50,13 @@ public class MotDePasseOublie extends JFrame {
         gbc.gridy = 1;
         gbc.gridwidth = 2;
         JButton boutonSuivant  = new JButton("Suivant");
+        boutonSuivant.setFont(StyleUI.POLICE_BOUTON);
+        boutonSuivant.setBackground(StyleUI.MARINE);
+        boutonSuivant.setForeground(Color.WHITE);
+        boutonSuivant.setOpaque(true);
+        boutonSuivant.setBorderPainted(false);
+        boutonSuivant.setFocusPainted(false);
+        boutonSuivant.setCursor(new Cursor(Cursor.HAND_CURSOR));
         panel.add(boutonSuivant, gbc);
 
         boutonSuivant.addActionListener(e -> {
@@ -75,12 +85,15 @@ public class MotDePasseOublie extends JFrame {
         gbc.gridy = 0;
         gbc.gridwidth = 2;
         labelQuestion = new JLabel("");
+        labelQuestion.setFont(StyleUI.POLICE_LABEL);
         panel.add(labelQuestion, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
-        panel.add(new JLabel("Réponse :"), gbc);
+        JLabel labelReponse = new JLabel("Réponse :");
+        labelReponse.setFont(StyleUI.POLICE_LABEL);
+        panel.add(labelReponse, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 1;
@@ -91,6 +104,13 @@ public class MotDePasseOublie extends JFrame {
         gbc.gridy = 2;
         gbc.gridwidth = 2;
         JButton boutonValider = new JButton("Valider");
+        boutonValider.setFont(StyleUI.POLICE_BOUTON);
+        boutonValider.setBackground(StyleUI.MARINE);
+        boutonValider.setForeground(Color.WHITE);
+        boutonValider.setOpaque(true);
+        boutonValider.setBorderPainted(false);
+        boutonValider.setFocusPainted(false);
+        boutonValider.setCursor(new Cursor(Cursor.HAND_CURSOR));
         panel.add(boutonValider, gbc);
 
         boutonValider.addActionListener(e -> {
@@ -115,7 +135,9 @@ public class MotDePasseOublie extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 0;
-        panel.add(new JLabel("Nouveau mot de passe :"), gbc);
+        JLabel labelNouveau = new JLabel("Nouveau mot de passe :");
+        labelNouveau.setFont(StyleUI.POLICE_LABEL);
+        panel.add(labelNouveau, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 0;
@@ -124,7 +146,9 @@ public class MotDePasseOublie extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 1;
-        panel.add(new JLabel("Confirmer mot de passe :"), gbc);
+        JLabel labelConfirmer = new JLabel("Confirmer mot de passe :");
+        labelConfirmer.setFont(StyleUI.POLICE_LABEL);
+        panel.add(labelConfirmer, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 1;
@@ -135,6 +159,13 @@ public class MotDePasseOublie extends JFrame {
         gbc.gridy = 2;
         gbc.gridwidth = 2;
         JButton boutonEnregistrer = new JButton("Enregistrer");
+        boutonEnregistrer.setFont(StyleUI.POLICE_BOUTON);
+        boutonEnregistrer.setBackground(StyleUI.MARINE);
+        boutonEnregistrer.setForeground(Color.WHITE);
+        boutonEnregistrer.setOpaque(true);
+        boutonEnregistrer.setBorderPainted(false);
+        boutonEnregistrer.setFocusPainted(false);
+        boutonEnregistrer.setCursor(new Cursor(Cursor.HAND_CURSOR));
         panel.add(boutonEnregistrer, gbc);
 
         boutonEnregistrer.addActionListener(e -> {

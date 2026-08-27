@@ -130,6 +130,7 @@ public class Main extends JFrame {
                 LocalDateTime heureArrivee = LocalTime.parse(champ5.getText().trim(), fmt).atDate(today);
                 LocalDateTime heureDepart = LocalTime.parse(champ6.getText().trim(), fmt).atDate(today);
                 String motif = champ7.getText();
+                String service = champ8.getText();
 
                 Visiteur visiteur = new Visiteur(nom, prenom, contact, numCni);
                 VisiteurDAO visiteurDAO = new VisiteurDAO();
@@ -144,7 +145,7 @@ public class Main extends JFrame {
                 int utilisateurIdPlaceholder = 1; // TODO: remplacer par l'id de l'utilisateur connect+�
 
                 Visite visite = new Visite(motif, heureArrivee, heureDepart,
-                        "", "", idVisiteur, utilisateurIdPlaceholder);
+                        service, "", idVisiteur, utilisateurIdPlaceholder);
 
                 VisiteDAO visiteDAO = new VisiteDAO();
                 boolean success = visiteDAO.enregistrerVisite(visite);
@@ -158,6 +159,7 @@ public class Main extends JFrame {
                     champ5.setText("");
                     champ6.setText("");
                     champ7.setText("");
+                    champ8.setText("");
                 } else {
                     JOptionPane.showMessageDialog(this, "Erreur lors de l'enregistrement de la visite.",
                             "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -180,6 +182,7 @@ public class Main extends JFrame {
             champ5.setText("");
             champ6.setText("");
             champ7.setText("");
+            champ8.setText("");
         });
 
         JPanel panelBoutons = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));

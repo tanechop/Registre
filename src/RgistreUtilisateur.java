@@ -19,7 +19,7 @@ public class RgistreUtilisateur extends JFrame {
 
     public RgistreUtilisateur(){
 
-        setTitle("Creér compte");
+        setTitle("Créer compte");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(700, 400);
         setLocationRelativeTo(null);
@@ -28,9 +28,9 @@ public class RgistreUtilisateur extends JFrame {
         // panel principale
         JPanel principale =new JPanel(new BorderLayout(0, 1));
 
-        titre= new JLabel("", SwingConstants.CENTER);
+        titre= new JLabel("Créer un compte", SwingConstants.CENTER);
         titre.setFont(new Font("COOPER BLACK", Font.BOLD, 28));
-        titre.setForeground(new Color(22, 73, 227, 255)); // Optionnel : couleur du texte
+        titre.setForeground(StyleUI.MARINE);// Optionnel : couleur du texte
 // 2. Ajouter une marge sous le titre (20px en bas)
         titre.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
 // 3. L'ajouter en HAUT de votre panel principal
@@ -44,16 +44,16 @@ public class RgistreUtilisateur extends JFrame {
         gbc.insets = new Insets(5, 0, 15, 50);
 
         gbc.gridx = 0; gbc.gridy = 0; gbc.weightx = 0.2;
-        JLabel nom=new  JLabel("<html>Nom d'utilisateur  <font color='red'>*</font>:</html>",SwingConstants.CENTER);
-        nom.setFont(new Font("BOOK Antiqua",Font.BOLD,16));
+        JLabel nom=new  JLabel("<html>    Nom d'utilisateur  <font color='red'>*</font>:</html>",SwingConstants.RIGHT);
+        nom.setFont(StyleUI.POLICE_LABEL);
         centre.add(nom,gbc);
         gbc.gridx = 1; gbc.gridy = 0; gbc.weightx = 1;
         NOMUTILISATEUR = new JTextField();
         centre.add(NOMUTILISATEUR,gbc);
 
         gbc.gridx = 0; gbc.gridy = 1; gbc.weightx = 0.3;
-        JLabel passeword=new  JLabel("<html>Mot de passe <font color='red'>*</font>:</html>",SwingConstants.CENTER);// CRRER un label
-        passeword.setFont(new Font("BOOK Antiqua",Font.BOLD,16));
+        JLabel passeword=new  JLabel("<html>    Mot de passe <font color='red'>*</font>:</html>",SwingConstants.RIGHT);// CRRER un label
+        passeword.setFont(StyleUI.POLICE_LABEL);
         centre.add(passeword,gbc);
         gbc.gridx = 1; gbc.gridy = 1; gbc.weightx = 0.7;
         motdepasse = new JPasswordField();//cree un interface de champ qui vas contenir le mot de passe saisir et le cripter
@@ -61,16 +61,16 @@ public class RgistreUtilisateur extends JFrame {
 
         // --- Ligne 2 : Choix du Rôle (Boutons Radio) ---
         gbc.gridx = 0; gbc.gridy = 2; gbc.weightx = 0.3;
-        JLabel lblRole = new JLabel("<html>Rôle  <font color='red'>*</font>:</html>", SwingConstants.CENTER);
-        lblRole.setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
+        JLabel lblRole = new JLabel("<html>    Rôle  <font color='red'>*</font>:</html>", SwingConstants.RIGHT);
+        lblRole.setFont(StyleUI.POLICE_LABEL);
         centre.add(lblRole, gbc);
 
         // Configuration des boutons radio
         rbStandard = new JRadioButton("Utilisateur Standard", true);
         rbSuperviseur = new JRadioButton("Administrateur");
 
-        rbStandard.setFont(new Font("BOOK Antiqua", Font.PLAIN, 14));
-        rbSuperviseur.setFont(new Font("BOOK Antiqua", Font.PLAIN, 14));
+        rbSuperviseur.setFont(StyleUI.POLICE_LABEL);
+        rbStandard.setFont(StyleUI.POLICE_LABEL);
 
 
         ButtonGroup groupeRole = new ButtonGroup();
@@ -87,8 +87,8 @@ public class RgistreUtilisateur extends JFrame {
         centre.add(new JLabel(""), gbc);
 
         gbc.gridx = 0; gbc.gridy = 3; gbc.weightx = 0.3;
-        JLabel lblEmail = new JLabel("<html>Question de sécuritè  <font color='red'>*</font>: </html>", SwingConstants.RIGHT);
-        lblEmail.setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
+        JLabel lblEmail = new JLabel("<html>    Question de sécurité  <font color='red'>*</font>: </html>", SwingConstants.RIGHT);
+        lblEmail.setFont(StyleUI.POLICE_LABEL);
         centre.add(lblEmail, gbc);
         gbc.gridx = 1; gbc.gridy = 3; gbc.weightx = 0.7;
         Question= new JTextArea();
@@ -99,8 +99,8 @@ public class RgistreUtilisateur extends JFrame {
         centre.add(Question, gbc);
 
         gbc.gridx = 0; gbc.gridy = 4; gbc.weightx = 0.2;
-        JLabel lbrepose = new JLabel("<html>Réponse <font color='red'>*</font>:</html>", SwingConstants.RIGHT);
-        lbrepose.setFont(new Font("BOOK Antiqua", Font.BOLD, 16));
+        JLabel lbrepose = new JLabel("<html>    Réponse <font color='red'>*</font>:</html>", SwingConstants.RIGHT);
+        lbrepose.setFont(StyleUI.POLICE_LABEL);
         centre.add(lbrepose, gbc);
         gbc.gridx = 1; gbc.gridy = 4; gbc.weightx = 0.7;
         reponse= new JTextArea();
@@ -115,6 +115,13 @@ public class RgistreUtilisateur extends JFrame {
 
         //gbc.gridx = 0; gbc.gridy = 4; gbc.weighty = 1.0;
         bouton = new JButton("<html><span style='color: #10b981; font-size: 10px; font-weight: bold;'>\u2713</span> OK</html>\"");
+        bouton.setFont(StyleUI.POLICE_BOUTON);
+        bouton.setBackground(StyleUI.MARINE);
+        bouton.setForeground(Color.WHITE);
+        bouton.setOpaque(true);
+        bouton.setBorderPainted(false);
+        bouton.setFocusPainted(false);
+        bouton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         bouton.addActionListener(e ->{
             String username = NOMUTILISATEUR.getText();
             String password = new String(motdepasse.getPassword());
@@ -137,9 +144,21 @@ public class RgistreUtilisateur extends JFrame {
         });
 
         bouton2= new JButton("<html><span style='color: #dc2626; font-size: 10px;'>\u2716</span> Annuler</htmL");
+        bouton2.setFont(StyleUI.POLICE_BOUTON);
+        bouton2.setBackground(Color.WHITE);
+        bouton2.setForeground(StyleUI.MARINE);
+        bouton2.setBorder(BorderFactory.createLineBorder(StyleUI.GRIS_BORDURE, 1));
+        bouton2.setFocusPainted(false);
+        bouton2.setCursor(new Cursor(Cursor.HAND_CURSOR));
         bouton2.addActionListener(e ->{dispose();});
 
         bouton3= new JButton("<html><span style='color: #4b5563; font-size: 10px;'>\u21BB</span> Réinitialiser</html");
+        bouton3.setFont(StyleUI.POLICE_BOUTON);
+        bouton3.setBackground(Color.WHITE);
+        bouton3.setForeground(StyleUI.MARINE);
+        bouton3.setBorder(BorderFactory.createLineBorder(StyleUI.GRIS_BORDURE, 1));
+        bouton3.setFocusPainted(false);
+        bouton3.setCursor(new Cursor(Cursor.HAND_CURSOR));
         bouton3.addActionListener(e ->{
             NOMUTILISATEUR.setText("");
             motdepasse.setText("");
