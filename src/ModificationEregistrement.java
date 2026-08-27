@@ -29,7 +29,6 @@ public class ModificationEregistrement extends JFrame {
     private final int idVisite;
     private final Runnable surModificationReussie;
 
-
     public ModificationEregistrement(int idVisiteur, int idVisite,
                                      String nom, String prenom, String numCni, int contact,
                                      String heureArrivee, String heureDepart,
@@ -40,7 +39,6 @@ public class ModificationEregistrement extends JFrame {
         this.idVisite = idVisite;
         this.surModificationReussie = surModificationReussie;
 
-        // ... le reste du constructeur reste identique
         setSize(800, 760);
         setTitle("Modification Enregistrement");
         setResizable(false);
