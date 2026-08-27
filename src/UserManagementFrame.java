@@ -90,7 +90,7 @@ public class UserManagementFrame extends JFrame {
         table.getColumnModel().getColumn(2).setCellEditor(new BoutonsEditor());
         table.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
-        table.setRowHeight(28);
+        table.setRowHeight(30);
         JScrollPane scrollPane = new JScrollPane(table);
         panelCentre.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panelCentre.add(scrollPane, BorderLayout.CENTER);
@@ -100,24 +100,15 @@ public class UserManagementFrame extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    private static JButton creerBoutonAction(String symbole, Color couleur) {
-        JButton bouton = new JButton(symbole);
-        bouton.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 16));
-        bouton.setForeground(couleur);
-        bouton.setBorderPainted(false);
-        bouton.setContentAreaFilled(false);
-        bouton.setFocusPainted(false);
-        bouton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        return bouton;
-    }
+
     public static class BoutonsRenderer extends JLabel implements TableCellRenderer {
         private JButton boutonModifier;
         private JButton boutonSupprimer;
 
         public BoutonsRenderer(){
             setLayout(new FlowLayout(FlowLayout.CENTER, 5, 0));
-            boutonModifier = creerBoutonAction("✏", new Color(37, 99, 235));
-            boutonSupprimer = creerBoutonAction("🗑", new Color(220, 38, 38));
+            boutonModifier = new JButton("✏ Modifier");
+            boutonSupprimer = new JButton("🗑 Supprimer");
             add(boutonModifier);
             add(boutonSupprimer);
         }
@@ -136,8 +127,8 @@ public class UserManagementFrame extends JFrame {
 
         public BoutonsEditor(){
             panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 0));
-            boutonModifier = creerBoutonAction("✏", new Color(37, 99, 235));
-            boutonSupprimer = creerBoutonAction("🗑", new Color(220, 38, 38));
+            boutonModifier = new JButton("✏ Modifier");
+            boutonSupprimer = new JButton("🗑 Supprimer");
 
             boutonModifier.addActionListener(e -> {
                 fireEditingStopped();
