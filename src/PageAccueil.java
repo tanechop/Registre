@@ -16,30 +16,8 @@ public class PageAccueil extends JFrame {
     private JTextField champDate;
     private JButton buttonRechercher;
     private JButton buttonExporter;
+
     private String currentUser;
-
-    //  Classe interne pour dessiner le logo en filigrane
-    class BackgroundPanel extends JPanel {
-        private java.awt.Image backgroundImage;
-
-        public BackgroundPanel(java.awt.Image image) {
-            this.backgroundImage = image;
-            setLayout(new BorderLayout());
-        }
-
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            if (backgroundImage != null) {
-                Graphics2D g2d = (Graphics2D) g.create();
-                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.2f));
-                int x = (getWidth() - backgroundImage.getWidth(null)) / 2;
-                int y = (getHeight() - backgroundImage.getHeight(null)) / 2;
-                g2d.drawImage(backgroundImage, x, y, this);
-                g2d.dispose();
-            }
-        }
-    }
 
     public PageAccueil(String user) {
         this.currentUser = user;
@@ -47,7 +25,7 @@ public class PageAccueil extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
         setTitle("Page Accueil - Connecté : " + user);
-        setSize(1400, 800);
+        setSize(1400, 800); // fenêtre plus grande
         setLocationRelativeTo(null);
 
         JPanel principale = new JPanel(new BorderLayout());
@@ -61,7 +39,7 @@ public class PageAccueil extends JFrame {
         titre.setBorder(BorderFactory.createEmptyBorder(15, 0, 20, 0));
         topPanel.add(titre, BorderLayout.CENTER);
 
-        // Recherche
+        // Recherche (cachée au départ)
         JPanel recherchePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         champNom = new JTextField(10);
         champDate = new JTextField(10);
@@ -75,7 +53,7 @@ public class PageAccueil extends JFrame {
         recherchePanel.setVisible(false);
         topPanel.add(recherchePanel, BorderLayout.WEST);
 
-        // Export
+        // Export (caché au départ)
         JPanel exportPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonExporter = new JButton("Exporter");
         buttonExporter.addActionListener(e -> exporterPDF());
@@ -95,20 +73,17 @@ public class PageAccueil extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
 
-        JButton buttonHistorique = new JButton("Historique");
+        JButton buttonHistorique = new JButton("Historiques");
         buttonHistorique.addActionListener(e -> {
             recherchePanel.setVisible(true);
             exportPanel.setVisible(true);
             afficherHistorique();
         });
 
-        JButton buttonEnregistrer = new JButton("Nouvelle visite");
+        JButton buttonEnregistrer = new JButton("Enregistrer");
         buttonEnregistrer.addActionListener(e -> new Main());
         JButton buttonDeconnexion = new JButton("Déconnexion");
-        buttonDeconnexion.addActionListener(e -> {new Connexion().setVisible(true);
-                dispose();});
-
-
+        buttonDeconnexion.addActionListener(e -> dispose());
 
         gbc.gridy = 0; panelGauche.add(buttonHistorique, gbc);
         gbc.gridy = 1; panelGauche.add(buttonEnregistrer, gbc);
@@ -116,27 +91,40 @@ public class PageAccueil extends JFrame {
 
         principale.add(panelGauche, BorderLayout.WEST);
 
-        // --- Conteneur central avec logo en filigrane ---
-        ImageIcon logoIcon = new ImageIcon(getClass().getResource("/logo.png"));
-
-// Ici on redimensionne directement l'image
-        java.awt.Image logoImage = logoIcon.getImage().getScaledInstance(600, 600, java.awt.Image.SCALE_SMOOTH);
-
-        center = new BackgroundPanel(logoImage);
+        // --- Conteneur central ---
+        center = new JPanel(new BorderLayout());
         principale.add(center, BorderLayout.CENTER);
 
         setContentPane(principale);
-
-
     }
 
-    // Afficher historique
+    // Vérification utilisateur dans la table
+    public static boolean verifierUtilisateur(String username, String password) {
+        try (Connection conn = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/visitors_db", "root", "")) {
+
+            String sql = "SELECT * FROM utilisateur WHERE nom_d_utilisateur=? AND mot_de_passe=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, password);
+
+            ResultSet rs = ps.executeQuery();
+            return rs.next(); // true si trouvé
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erreur connexion utilisateur : " + e.getMessage());
+            return false;
+        }
+    }
+
+    // Afficher l’historique
     public void afficherHistorique() {
         table = new JTable(new DefaultTableModel(
                 new Object[]{"Nom", "Prénom", "Contact", "Num_CNI", "Motif",
                         "Date_visite", "Heure_arrivee", "Heure_depart",
                         "Service", "Visiteurs_id", "Utilisateur_id"}, 0
         ));
+
         table.setShowGrid(true);
         table.setGridColor(Color.GRAY);
         JTableHeader header = table.getTableHeader();
@@ -145,6 +133,7 @@ public class PageAccueil extends JFrame {
         header.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 14));
 
         JScrollPane scrollPane = new JScrollPane(table);
+
         chargerVisiteur(table, null, null);
 
         center.removeAll();
@@ -153,7 +142,7 @@ public class PageAccueil extends JFrame {
         center.repaint();
     }
 
-    // Recherche par nom et date
+    // Recherche par nom/date
     public void rechercherParNomEtDate() {
         String nom = champNom.getText().trim();
         String date = champDate.getText().trim();
@@ -168,6 +157,7 @@ public class PageAccueil extends JFrame {
         table.setGridColor(Color.GRAY);
 
         JScrollPane scrollPane = new JScrollPane(table);
+
         chargerVisiteur(table, nom.isEmpty() ? null : nom, date.isEmpty() ? null : date);
 
         center.removeAll();
@@ -197,6 +187,7 @@ public class PageAccueil extends JFrame {
                 sql += " WHERE DATE(vi.date_visite) = ?";
             }
 
+
             PreparedStatement ps = conn.prepareStatement(sql);
 
             if (nom != null && date != null) {
@@ -206,6 +197,7 @@ public class PageAccueil extends JFrame {
                 ps.setString(1, "%" + nom + "%");
             } else if (date != null) {
                 ps.setDate(1, java.sql.Date.valueOf(date));
+
             }
 
             ResultSet rs = ps.executeQuery();
@@ -230,60 +222,24 @@ public class PageAccueil extends JFrame {
             JOptionPane.showMessageDialog(this, "Erreur : " + e.getMessage());
         }
     }
-    // Exporter tous les résultats visibles dans un seul PDF
+
     // Export PDF
     private void exporterPDF() {
         try {
-            if (table.getRowCount() == 0) {
-                JOptionPane.showMessageDialog(this, "Aucun enregistrement à exporter.");
-                return;
-            }
-
-            String dateRecherche = champDate.getText().trim();
-            String fileName = dateRecherche.isEmpty()
-                    ? "export_visiteurs.pdf"
-                    : "export_visiteurs_" + dateRecherche + ".pdf";
-
             Document document = new Document(PageSize.A4.rotate());
-            PdfWriter.getInstance(document, new FileOutputStream(fileName));
+            PdfWriter.getInstance(document, new FileOutputStream("export_visiteurs.pdf"));
             document.open();
-
-            com.itextpdf.text.Font titreFont = new com.itextpdf.text.Font(
-                    com.itextpdf.text.Font.FontFamily.HELVETICA,
-                    18,
-                    com.itextpdf.text.Font.BOLD,
-                    BaseColor.BLACK
-            );
-            Paragraph titre = new Paragraph("Historique des visiteurs", titreFont);
-            titre.setAlignment(Element.ALIGN_CENTER);
-            titre.setSpacingAfter(20);
-            document.add(titre);
 
             PdfPTable pdfTable = new PdfPTable(table.getColumnCount());
             pdfTable.setWidthPercentage(100);
 
-            // En-têtes
-            for (int i = 0; i < table.getColumnCount(); i++) {
-                String colName = table.getColumnName(i);
-                com.itextpdf.text.Font headerFont = new com.itextpdf.text.Font(
-                        com.itextpdf.text.Font.FontFamily.HELVETICA,
-                        12,
-                        com.itextpdf.text.Font.BOLD,
-                        BaseColor.WHITE
-                );
-                PdfPCell headerCell = new PdfPCell(new Phrase(colName, headerFont));
-                headerCell.setBackgroundColor(BaseColor.DARK_GRAY);
-                headerCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                pdfTable.addCell(headerCell);
-            }
-
-            // Toutes les lignes visibles
+            // Ajouter les lignes
             for (int rows = 0; rows < table.getRowCount(); rows++) {
                 for (int cols = 0; cols < table.getColumnCount(); cols++) {
                     Object value = table.getValueAt(rows, cols);
                     PdfPCell cell = new PdfPCell(new Phrase(value == null ? "" : value.toString()));
                     cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    cell.setBorderWidth(0.5f);
+                    cell.setBorderWidth(0.5f); // bordure fine
                     pdfTable.addCell(cell);
                 }
             }
@@ -291,7 +247,7 @@ public class PageAccueil extends JFrame {
             document.add(pdfTable);
             document.close();
 
-            JOptionPane.showMessageDialog(this, "Export PDF réussi : " + fileName);
+            JOptionPane.showMessageDialog(this, "Export PDF réussi : export_visiteurs.pdf");
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erreur export : " + e.getMessage());
@@ -301,9 +257,30 @@ public class PageAccueil extends JFrame {
     // --- Point d'entrée principal ---
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            // ⚡ On ne fait plus de connexion ici
-            // On lance juste l'interface avec un utilisateur fictif
-            new PageAccueil("UtilisateurTest").setVisible(true);
+            try (Connection conn = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/visitors_db", "root", "")) {
+
+                // Vérifier si au moins un utilisateur existe
+                String sql = "SELECT nom_d_utilisateur FROM utilisateur LIMIT 1";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    String user = rs.getString("nom_d_utilisateur");
+                    new PageAccueil(user).setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "Aucun utilisateur trouvé dans la table utilisateur",
+                            "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,
+                        "Erreur de connexion à la base : " + e.getMessage(),
+                        "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
         });
     }
 }
+
+
