@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 
-
 public class PageAccueil extends JFrame {
 
     private JTable table;
@@ -17,6 +16,8 @@ public class PageAccueil extends JFrame {
     private JTextField champDate;
     private JButton buttonRechercher;
     private JButton buttonExporter;
+    private JPanel recherchePanel;
+    private JPanel exportPanel;
 
     private String currentUser;
 
@@ -26,12 +27,11 @@ public class PageAccueil extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
         setTitle("Page Accueil - Connecté : " + user);
-        setSize(1400, 800); // fenêtre plus grande
+        setSize(1400, 800);
         setLocationRelativeTo(null);
 
         JPanel principale = new JPanel(new BorderLayout());
 
-        // --- Panneau supérieur ---
         topPanel = new JPanel(new BorderLayout());
 
         JLabel titre = new JLabel("Accueil", SwingConstants.CENTER);
@@ -40,8 +40,7 @@ public class PageAccueil extends JFrame {
         titre.setBorder(BorderFactory.createEmptyBorder(15, 0, 20, 0));
         topPanel.add(titre, BorderLayout.CENTER);
 
-        // Recherche (cachée au départ)
-        JPanel recherchePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        recherchePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         champNom = new JTextField(10);
         champDate = new JTextField(10);
         buttonRechercher = new JButton("Rechercher");
@@ -54,17 +53,20 @@ public class PageAccueil extends JFrame {
         recherchePanel.setVisible(false);
         topPanel.add(recherchePanel, BorderLayout.WEST);
 
-        // Export (caché au départ)
-        JPanel exportPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        exportPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonExporter = new JButton("Exporter");
         buttonExporter.addActionListener(e -> exporterPDF());
+
+        JButton buttonModifier = new JButton("Modifier");
+        buttonModifier.addActionListener(e -> modifierLigneSelectionnee());
+
+        exportPanel.add(buttonModifier);
         exportPanel.add(buttonExporter);
         exportPanel.setVisible(false);
         topPanel.add(exportPanel, BorderLayout.EAST);
 
         principale.add(topPanel, BorderLayout.NORTH);
 
-        // --- Barre latérale gauche ---
         JPanel panelGauche = new JPanel(new GridBagLayout());
         panelGauche.setPreferredSize(new Dimension(200, 0));
         panelGauche.setBackground(new Color(38, 124, 25));
@@ -82,10 +84,17 @@ public class PageAccueil extends JFrame {
         });
 
         JButton buttonEnregistrer = new JButton("Nouvel Visite");
-        buttonEnregistrer.addActionListener(e -> new Main());
+        buttonEnregistrer.addActionListener(e -> {
+            recherchePanel.setVisible(false);
+            exportPanel.setVisible(false);
+            new Main();
+        });
+
         JButton buttonDeconnexion = new JButton("Déconnexion");
-        buttonDeconnexion.addActionListener(e -> {new Connexion().setVisible(true);
-        dispose();});
+        buttonDeconnexion.addActionListener(e -> {
+            new Connexion().setVisible(true);
+            dispose();
+        });
 
         gbc.gridy = 0; panelGauche.add(buttonHistorique, gbc);
         gbc.gridy = 1; panelGauche.add(buttonEnregistrer, gbc);
@@ -93,25 +102,26 @@ public class PageAccueil extends JFrame {
 
         principale.add(panelGauche, BorderLayout.WEST);
 
-        // --- Conteneur central ---
         center = new JPanel(new BorderLayout());
         principale.add(center, BorderLayout.CENTER);
 
         setContentPane(principale);
     }
 
-    // Vérification utilisateur dans la table
     public static boolean verifierUtilisateur(String username, String password) {
-        try (Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/visitors_db", "root", "")) {
+        String sql = "SELECT * FROM utilisateur WHERE nom_d_utilisateur=? AND mot_de_passe=?";
 
-            String sql = "SELECT * FROM utilisateur WHERE nom_d_utilisateur=? AND mot_de_passe=?";
-            PreparedStatement ps = conn.prepareStatement(sql);
+        try (
+                Connection conn = DriverManager.getConnection(
+                        "jdbc:mysql://localhost:3306/visitors_db", "root", "");
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
             ps.setString(1, username);
             ps.setString(2, password);
 
-            ResultSet rs = ps.executeQuery();
-            return rs.next(); // true si trouvé
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erreur connexion utilisateur : " + e.getMessage());
@@ -119,11 +129,10 @@ public class PageAccueil extends JFrame {
         }
     }
 
-    // Afficher l’historique
     public void afficherHistorique() {
         table = new JTable(new DefaultTableModel(
-                new Object[]{"Nom", "Prénom", "Contact", "Num_CNI", "Motif",
-                        "Date_visite", "Heure_arrivee", "Heure_depart",
+                new Object[]{"id_Visites", "Nom", "Prénom", "Contact", "Num_CNI", "Motif", "Date_visite",
+                        "Heure_arrivee", "Heure_depart",
                         "Service", "Visiteurs_id", "Utilisateur_id"}, 0
         ));
 
@@ -133,6 +142,8 @@ public class PageAccueil extends JFrame {
         header.setBackground(new Color(220, 240, 220));
         header.setForeground(new Color(34, 85, 50));
         header.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 14));
+
+        table.getColumnModel().removeColumn(table.getColumnModel().getColumn(0));
 
         JScrollPane scrollPane = new JScrollPane(table);
 
@@ -144,19 +155,19 @@ public class PageAccueil extends JFrame {
         center.repaint();
     }
 
-    // Recherche par nom/date
     public void rechercherParNomEtDate() {
         String nom = champNom.getText().trim();
         String date = champDate.getText().trim();
 
         table = new JTable(new DefaultTableModel(
-                new Object[]{"Nom", "Prénom", "Contact", "Num_CNI", "Motif",
-                        "Date_visite", "Heure_arrivee", "Heure_depart",
+                new Object[]{"id_Visites", "Nom", "Prénom", "Contact", "Num_CNI", "Motif", "Date_visite",
+                        "Heure_arrivee", "Heure_depart",
                         "Service", "Visiteurs_id", "Utilisateur_id"}, 0
         ));
 
         table.setShowGrid(true);
         table.setGridColor(Color.GRAY);
+        table.getColumnModel().removeColumn(table.getColumnModel().getColumn(0));
 
         JScrollPane scrollPane = new JScrollPane(table);
 
@@ -168,30 +179,28 @@ public class PageAccueil extends JFrame {
         center.repaint();
     }
 
-    // Charger visiteurs
     private void chargerVisiteur(JTable table, String nom, String date) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
 
-        try (Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/visitors_db", "root", "")) {
+        String sql = "SELECT vi.id_Visites, v.nom, v.prenom, v.contact, v.num_CNI, " +
+                "vi.motif, vi.date_visite, vi.heure_de_depart, vi.heure_d_arrivee, " +
+                "vi.service, vi.Visiteurs_id_Visiteurs, vi.Utilisateur_id_Utilisateur " +
+                "FROM visiteurs v LEFT JOIN visites vi ON v.id_visiteurs = vi.Visiteurs_id_Visiteurs";
 
-            String sql = "SELECT v.nom, v.prenom, v.contact, v.num_CNI, " +
-                    "vi.motif, vi.date_visite, vi.heure_de_depart, vi.heure_d_arrivee, " +
-                    "vi.service, vi.Visiteurs_id_Visiteurs, vi.Utilisateur_id_Utilisateur " +
-                    "FROM visiteurs v LEFT JOIN visites vi ON v.id_visiteurs = vi.Visiteurs_id_Visiteurs";
+        if (nom != null && date != null) {
+            sql += " WHERE v.nom LIKE ? AND DATE(vi.date_visite) = ?";
+        } else if (nom != null) {
+            sql += " WHERE v.nom LIKE ?";
+        } else if (date != null) {
+            sql += " WHERE DATE(vi.date_visite) = ?";
+        }
 
-            if (nom != null && date != null) {
-                sql += " WHERE v.nom LIKE ? AND vi.date_visite = ?";
-            } else if (nom != null) {
-                sql += " WHERE v.nom LIKE ?";
-            } else if (date != null) {
-                sql += " WHERE DATE(vi.date_visite) = ?";
-            }
-
-
-            PreparedStatement ps = conn.prepareStatement(sql);
-
+        try (
+                Connection conn = DriverManager.getConnection(
+                        "jdbc:mysql://localhost:3306/visitors_db", "root", "");
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
             if (nom != null && date != null) {
                 ps.setString(1, "%" + nom + "%");
                 ps.setString(2, date);
@@ -199,25 +208,25 @@ public class PageAccueil extends JFrame {
                 ps.setString(1, "%" + nom + "%");
             } else if (date != null) {
                 ps.setDate(1, java.sql.Date.valueOf(date));
-
             }
 
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                model.addRow(new Object[]{
-                        rs.getString("nom"),
-                        rs.getString("prenom"),
-                        rs.getInt("contact"),
-                        rs.getString("num_CNI"),
-                        rs.getString("motif"),
-                        rs.getDate("date_visite"),
-                        rs.getTime("heure_d_arrivee"),
-                        rs.getTime("heure_de_depart"),
-                        rs.getString("service"),
-                        rs.getInt("Visiteurs_id_Visiteurs"),
-                        rs.getInt("Utilisateur_id_Utilisateur"),
-                });
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    model.addRow(new Object[]{
+                            rs.getInt("id_Visites"),
+                            rs.getString("nom"),
+                            rs.getString("prenom"),
+                            rs.getInt("contact"),
+                            rs.getString("num_CNI"),
+                            rs.getString("motif"),
+                            rs.getDate("date_visite"),
+                            rs.getTime("heure_d_arrivee"),
+                            rs.getTime("heure_de_depart"),
+                            rs.getString("service"),
+                            rs.getInt("Visiteurs_id_Visiteurs"),
+                            rs.getInt("Utilisateur_id_Utilisateur"),
+                    });
+                }
             }
 
         } catch (Exception e) {
@@ -225,7 +234,50 @@ public class PageAccueil extends JFrame {
         }
     }
 
-    // Export PDF
+    private void modifierLigneSelectionnee() {
+        if (table == null || table.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ligne à modifier.");
+            return;
+        }
+
+        int rowVue = table.getSelectedRow();
+        int rowModele = table.convertRowIndexToModel(rowVue);
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+        Object idVisitesObj = model.getValueAt(rowModele, 0);
+        if (idVisitesObj == null) {
+            JOptionPane.showMessageDialog(this,
+                    "Ce visiteur n'a aucune visite enregistrée à modifier.");
+            return;
+        }
+        int idVisites = (int) idVisitesObj;
+
+        String nom = (String) model.getValueAt(rowModele, 1);
+        String prenom = (String) model.getValueAt(rowModele, 2);
+        int contact = (int) model.getValueAt(rowModele, 3);
+        String numCni = (String) model.getValueAt(rowModele, 4);
+        String motif = (String) model.getValueAt(rowModele, 5);
+
+        java.sql.Time heureArriveeSql = (java.sql.Time) model.getValueAt(rowModele, 7);
+        java.sql.Time heureDepartSql = (java.sql.Time) model.getValueAt(rowModele, 8);
+
+        if (heureArriveeSql == null || heureDepartSql == null) {
+            JOptionPane.showMessageDialog(this,
+                    "Les heures d'arrivée/départ sont manquantes pour cette visite.");
+            return;
+        }
+
+        String heureArrivee = heureArriveeSql.toLocalTime().toString().substring(0, 5);
+        String heureDepart = heureDepartSql.toLocalTime().toString().substring(0, 5);
+
+        String service = (String) model.getValueAt(rowModele, 9);
+        int idVisiteurs = (int) model.getValueAt(rowModele, 10);
+
+        new ModificationEregistrement(idVisiteurs, idVisites, nom, prenom, numCni, contact,
+                heureArrivee, heureDepart, motif, service,
+                this::afficherHistorique);
+    }
+
     private void exporterPDF() {
         try {
             Document document = new Document(PageSize.A4.rotate());
@@ -235,13 +287,12 @@ public class PageAccueil extends JFrame {
             PdfPTable pdfTable = new PdfPTable(table.getColumnCount());
             pdfTable.setWidthPercentage(100);
 
-            // Ajouter les lignes
             for (int rows = 0; rows < table.getRowCount(); rows++) {
                 for (int cols = 0; cols < table.getColumnCount(); cols++) {
                     Object value = table.getValueAt(rows, cols);
                     PdfPCell cell = new PdfPCell(new Phrase(value == null ? "" : value.toString()));
                     cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                    cell.setBorderWidth(0.5f); // bordure fine
+                    cell.setBorderWidth(0.5f);
                     pdfTable.addCell(cell);
                 }
             }
@@ -256,17 +307,16 @@ public class PageAccueil extends JFrame {
         }
     }
 
-    // --- Point d'entrée principal ---
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            try (Connection conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/visitors_db", "root", "")) {
+            String sql = "SELECT nom_d_utilisateur FROM utilisateur LIMIT 1";
 
-                // Vérifier si au moins un utilisateur existe
-                String sql = "SELECT nom_d_utilisateur FROM utilisateur LIMIT 1";
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ResultSet rs = ps.executeQuery();
-
+            try (
+                    Connection conn = DriverManager.getConnection(
+                            "jdbc:mysql://localhost:3306/visitors_db", "root", "");
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    ResultSet rs = ps.executeQuery()
+            ) {
                 if (rs.next()) {
                     String user = rs.getString("nom_d_utilisateur");
                     new PageAccueil(user).setVisible(true);
@@ -284,5 +334,3 @@ public class PageAccueil extends JFrame {
         });
     }
 }
-
-
