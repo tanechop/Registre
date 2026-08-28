@@ -21,7 +21,7 @@ public class RgistreUtilisateur extends JFrame {
 
         setTitle("Créer compte");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(700, 400);
+        setSize(700, 500);
         setLocationRelativeTo(null);
         setResizable(false);
 
@@ -32,7 +32,7 @@ public class RgistreUtilisateur extends JFrame {
         titre.setFont(new Font("COOPER BLACK", Font.BOLD, 28));
         titre.setForeground(StyleUI.MARINE);// Optionnel : couleur du texte
 // 2. Ajouter une marge sous le titre (20px en bas)
-        titre.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
+        titre.setBorder(BorderFactory.createEmptyBorder(15, 10, 15, 10));
 // 3. L'ajouter en HAUT de votre panel principal
         principale.add(titre, BorderLayout.NORTH);
 
@@ -41,10 +41,10 @@ public class RgistreUtilisateur extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.NORTH;
-        gbc.insets = new Insets(5, 0, 15, 50);
+        gbc.insets = new Insets(20, 20, 20, 20);
 
         gbc.gridx = 0; gbc.gridy = 0; gbc.weightx = 0.2;
-        JLabel nom=new  JLabel("<html>    Nom d'utilisateur  <font color='red'>*</font>:</html>",SwingConstants.RIGHT);
+        JLabel nom=new  JLabel("<html>    Nom d'utilisateur  <font color='red'>*</font>:</html>",SwingConstants.LEFT);
         nom.setFont(StyleUI.POLICE_LABEL);
         centre.add(nom,gbc);
         gbc.gridx = 1; gbc.gridy = 0; gbc.weightx = 1;
@@ -52,7 +52,7 @@ public class RgistreUtilisateur extends JFrame {
         centre.add(NOMUTILISATEUR,gbc);
 
         gbc.gridx = 0; gbc.gridy = 1; gbc.weightx = 0.3;
-        JLabel passeword=new  JLabel("<html>    Mot de passe <font color='red'>*</font>:</html>",SwingConstants.RIGHT);// CRRER un label
+        JLabel passeword=new  JLabel("<html>    Mot de passe <font color='red'>*</font>:</html>",SwingConstants.LEFT);// CRRER un label
         passeword.setFont(StyleUI.POLICE_LABEL);
         centre.add(passeword,gbc);
         gbc.gridx = 1; gbc.gridy = 1; gbc.weightx = 0.7;
@@ -61,7 +61,7 @@ public class RgistreUtilisateur extends JFrame {
 
         // --- Ligne 2 : Choix du Rôle (Boutons Radio) ---
         gbc.gridx = 0; gbc.gridy = 2; gbc.weightx = 0.3;
-        JLabel lblRole = new JLabel("<html>    Rôle  <font color='red'>*</font>:</html>", SwingConstants.RIGHT);
+        JLabel lblRole = new JLabel("<html>    Rôle  <font color='red'>*</font>:</html>", SwingConstants.LEFT);
         lblRole.setFont(StyleUI.POLICE_LABEL);
         centre.add(lblRole, gbc);
 
@@ -87,7 +87,7 @@ public class RgistreUtilisateur extends JFrame {
         centre.add(new JLabel(""), gbc);
 
         gbc.gridx = 0; gbc.gridy = 3; gbc.weightx = 0.3;
-        JLabel lblEmail = new JLabel("<html>    Question de sécurité  <font color='red'>*</font>: </html>", SwingConstants.RIGHT);
+        JLabel lblEmail = new JLabel("<html>    Question de sécurité  <font color='red'>*</font>: </html>", SwingConstants.LEFT);
         lblEmail.setFont(StyleUI.POLICE_LABEL);
         centre.add(lblEmail, gbc);
         gbc.gridx = 1; gbc.gridy = 3; gbc.weightx = 0.7;
@@ -99,7 +99,7 @@ public class RgistreUtilisateur extends JFrame {
         centre.add(Question, gbc);
 
         gbc.gridx = 0; gbc.gridy = 4; gbc.weightx = 0.2;
-        JLabel lbrepose = new JLabel("<html>    Réponse <font color='red'>*</font>:</html>", SwingConstants.RIGHT);
+        JLabel lbrepose = new JLabel("<html>    Réponse <font color='red'>*</font>:</html>", SwingConstants.LEFT);
         lbrepose.setFont(StyleUI.POLICE_LABEL);
         centre.add(lbrepose, gbc);
         gbc.gridx = 1; gbc.gridy = 4; gbc.weightx = 0.7;

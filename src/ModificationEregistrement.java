@@ -39,7 +39,7 @@ public class ModificationEregistrement extends JFrame {
         this.idVisite = idVisite;
         this.surModificationReussie = surModificationReussie;
 
-        setSize(800, 760);
+        setSize(600, 700);
         setTitle("Modification Enregistrement");
         setResizable(false);
         setLocationRelativeTo(null);
@@ -47,73 +47,66 @@ public class ModificationEregistrement extends JFrame {
         setBackground(Color.ORANGE);
 
         JPanel panelprincipale = new JPanel(new BorderLayout());
-        panelprincipale.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
-        panelprincipale.setBackground(new Color(93, 93, 103));
+        panelprincipale.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panelprincipale.setBackground(StyleUI.GRIS_CLAIR);
 
         titre = new JLabel(
                 "<html><span style='color: #10b981; font-size: 10px; font-weight: bold;background-color:blue'></span>Modification</html>",
                 SwingConstants.CENTER);
         titre.setFont(new java.awt.Font("COOPER BLACK", java.awt.Font.BOLD, 28));
-        titre.setForeground(new Color(241, 243, 241));
+        titre.setForeground(StyleUI.MARINE);
         titre.setBorder(BorderFactory.createEmptyBorder(0, 0, 30, 0));
         panelprincipale.add(titre, BorderLayout.NORTH);
 
-        JPanel panel = new JPanel(new GridLayout(9, 2, 0, 40));
-        panel.setBackground(new Color(180, 184, 193));
+        JPanel panel = new JPanel(new GridLayout(0, 2, 0, 15));
+        panel.setBackground(StyleUI.GRIS_CLAIR);
 
-        panel.add(new JLabel("<html>Nom <font color='red'>*</font> : </html>", SwingConstants.CENTER) {{
-            setFont(new java.awt.Font("BOOK Antiqua", java.awt.Font.BOLD, 16));
+        panel.add(new JLabel("<html>Nom <font color='red'>*</font> : </html>", SwingConstants.LEFT) {{
+            setFont(StyleUI.POLICE_LABEL);
         }});
         champ1 = new JTextField(nom);
         panel.add(champ1);
-        panel.add(new JLabel(""));
 
-        panel.add(new JLabel("<html>Prénom <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
-            setFont(new java.awt.Font("BOOK Antiqua", java.awt.Font.BOLD, 16));
+        panel.add(new JLabel("<html>Prénom <font color='red'>*</font> :</html>", SwingConstants.LEFT) {{
+            setFont(StyleUI.POLICE_LABEL);
         }});
         champ2 = new JTextField(prenom);
         panel.add(champ2);
-        panel.add(new JLabel(""));
 
-        panel.add(new JLabel("<html>N°CNI <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
-            setFont(new java.awt.Font("BOOK Antiqua", java.awt.Font.BOLD, 16));
+        panel.add(new JLabel("<html>N°CNI <font color='red'>*</font> :</html>", SwingConstants.LEFT) {{
+            setFont(StyleUI.POLICE_LABEL);
         }});
         champ3 = new JTextField(numCni);
         panel.add(champ3);
-        panel.add(new JLabel(""));
 
-        panel.add(new JLabel("<html>N° Téléphone <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
-            setFont(new java.awt.Font("BOOK Antiqua", java.awt.Font.BOLD, 16));
+        panel.add(new JLabel("<html>N° Téléphone <font color='red'>*</font> :</html>", SwingConstants.LEFT) {{
+            setFont(StyleUI.POLICE_LABEL);
         }});
         champ4 = new JTextField(String.valueOf(contact));
         panel.add(champ4);
-        panel.add(new JLabel(""));
 
-        panel.add(new JLabel("<html>Heure d'arrivée <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
-            setFont(new java.awt.Font("BOOK Antiqua", java.awt.Font.BOLD, 16));
+        panel.add(new JLabel("<html>Heure d'arrivée <font color='red'>*</font> :</html>", SwingConstants.LEFT) {{
+            setFont(StyleUI.POLICE_LABEL);
         }});
         champ5 = new JTextField(heureArrivee);
         panel.add(champ5);
-        panel.add(new JLabel(""));
 
-        panel.add(new JLabel("<html>Heure de départ <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
-            setFont(new java.awt.Font("BOOK Antiqua", java.awt.Font.BOLD, 16));
+        panel.add(new JLabel("<html>Heure de départ <font color='red'>*</font> :</html>", SwingConstants.LEFT) {{
+            setFont(StyleUI.POLICE_LABEL);
         }});
         champ6 = new JTextField(heureDepart);
         panel.add(champ6);
-        panel.add(new JLabel(""));
 
-        panel.add(new JLabel("<html>Motif <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
-            setFont(new java.awt.Font("BOOK Antiqua", java.awt.Font.BOLD, 16));
+        panel.add(new JLabel("<html>Motif <font color='red'>*</font> :</html>", SwingConstants.LEFT) {{
+            setFont(StyleUI.POLICE_LABEL);
         }});
         champ7 = new JTextArea(motif);
         champ7.setLineWrap(true);
         champ7.setWrapStyleWord(true);
         panel.add(champ7);
-        panel.add(new JLabel(""));
 
-        panel.add(new JLabel("<html>Service sollicité <font color='red'>*</font> :</html>", SwingConstants.CENTER) {{
-            setFont(new java.awt.Font("BOOK Antiqua", java.awt.Font.BOLD, 16));
+        panel.add(new JLabel("<html>Service sollicité <font color='red'>*</font> :</html>", SwingConstants.LEFT) {{
+            setFont(StyleUI.POLICE_LABEL);
         }});
         champ8 = new JTextField(service);
         panel.add(champ8);
@@ -122,8 +115,21 @@ public class ModificationEregistrement extends JFrame {
         panel.add(new JLabel(""));
 
         bouton1 = new JButton("<html><span style='color: #10b981; font-size: 10px; font-weight: bold;'>\u2713</span> Valider</html>");
-        bouton2 = new JButton("<html><span style='color: #dc2626; font-size: 10px;'>\u2716</span> Annuler</html>");
+        bouton1.setFont(StyleUI.POLICE_BOUTON);
+        bouton1.setBackground(StyleUI.MARINE);
+        bouton1.setForeground(Color.WHITE);
+        bouton1.setOpaque(true);
+        bouton1.setBorderPainted(false);
+        bouton1.setFocusPainted(false);
+        bouton1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
+        bouton2 = new JButton("<html><span style='color: #dc2626; font-size: 10px;'>\u2716</span> Annuler</html>");
+        bouton2.setFont(StyleUI.POLICE_BOUTON);
+        bouton2.setBackground(Color.WHITE);
+        bouton2.setForeground(StyleUI.MARINE);
+        bouton2.setBorder(BorderFactory.createLineBorder(StyleUI.GRIS_BORDURE, 1));
+        bouton2.setFocusPainted(false);
+        bouton2.setCursor(new Cursor(Cursor.HAND_CURSOR));
         bouton1.addActionListener(e -> {
             try {
                 String nouveauNom = champ1.getText();
@@ -176,7 +182,7 @@ public class ModificationEregistrement extends JFrame {
         panelBoutons.add(bouton2, SwingConstants.CENTER);
         panelBoutons.add(bouton1, SwingConstants.CENTER);
         panelBoutons.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-        panelBoutons.setBackground(new Color(180, 184, 193));
+        panelBoutons.setBackground(StyleUI.GRIS_CLAIR);
         panel.add(panelBoutons);
 
         panelprincipale.add(panel);
