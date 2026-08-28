@@ -36,7 +36,7 @@ public class PageAccueil extends JFrame {
 
         JLabel titre = new JLabel("Accueil", SwingConstants.CENTER);
         titre.setFont(new java.awt.Font("Cooper Black", java.awt.Font.BOLD, 48));
-        titre.setForeground(new Color(66, 72, 90));
+        titre.setForeground(StyleUI.MARINE);
         titre.setBorder(BorderFactory.createEmptyBorder(15, 0, 20, 0));
         topPanel.add(titre, BorderLayout.CENTER);
 
@@ -45,10 +45,19 @@ public class PageAccueil extends JFrame {
         champNom = new JTextField(10);
         champDate = new JTextField(10);
         buttonRechercher = new JButton("Rechercher");
+        buttonRechercher.setFont(StyleUI.POLICE_BOUTON);
+        buttonRechercher.setBackground(Color.WHITE);
+        buttonRechercher.setForeground(StyleUI.MARINE);
+        buttonRechercher.setBorder(BorderFactory.createLineBorder(StyleUI.GRIS_BORDURE, 1));
+        buttonRechercher.setCursor(new Cursor(Cursor.HAND_CURSOR));
         buttonRechercher.addActionListener(e -> rechercherParNomEtDate());
-        recherchePanel.add(new JLabel("Nom:"));
+        JLabel labelNom = new JLabel("Nom :");
+        labelNom.setFont(StyleUI.POLICE_LABEL);
+        recherchePanel.add(labelNom);
         recherchePanel.add(champNom);
-        recherchePanel.add(new JLabel("Date (AAAA-MM-JJ):"));
+        JLabel labelDate = new JLabel("Date (JJ/MM/AAAA) :");
+        labelDate.setFont(StyleUI.POLICE_LABEL);
+        recherchePanel.add(labelDate);
         recherchePanel.add(champDate);
         recherchePanel.add(buttonRechercher);
         recherchePanel.setVisible(false);
@@ -57,6 +66,11 @@ public class PageAccueil extends JFrame {
         // Export (caché au départ)
         JPanel exportPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonExporter = new JButton("Exporter");
+        buttonExporter.setFont(StyleUI.POLICE_BOUTON);
+        buttonExporter.setBackground(Color.WHITE);
+        buttonExporter.setForeground(StyleUI.MARINE);
+        buttonExporter.setBorder(BorderFactory.createLineBorder(StyleUI.GRIS_BORDURE, 1));
+        buttonExporter.setCursor(new Cursor(Cursor.HAND_CURSOR));
         buttonExporter.addActionListener(e -> exporterPDF());
         exportPanel.add(buttonExporter);
         exportPanel.setVisible(false);
@@ -67,23 +81,32 @@ public class PageAccueil extends JFrame {
         // --- Barre latérale gauche ---
         JPanel panelGauche = new JPanel(new GridBagLayout());
         panelGauche.setPreferredSize(new Dimension(200, 0));
-        panelGauche.setBackground(new Color(38, 124, 25));
+        panelGauche.setBackground(StyleUI.MARINE);
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
 
-        JButton buttonHistorique = new JButton("Historique");
+        JButton buttonHistorique = new JButton("Consulter l'historique");
+        buttonHistorique.setFont(StyleUI.POLICE_BOUTON);
+        buttonHistorique.setForeground(Color.WHITE);
+        buttonHistorique.setBackground(StyleUI.MARINE);
         buttonHistorique.addActionListener(e -> {
             recherchePanel.setVisible(true);
             exportPanel.setVisible(true);
             afficherHistorique();
         });
 
-        JButton buttonEnregistrer = new JButton("Nouvel Visite");
+        JButton buttonEnregistrer = new JButton("Nouvelle Visite");
+        buttonEnregistrer.setFont(StyleUI.POLICE_BOUTON);
+        buttonEnregistrer.setForeground(Color.WHITE);
+        buttonEnregistrer.setBackground(StyleUI.MARINE);
         buttonEnregistrer.addActionListener(e -> new Main());
         JButton buttonDeconnexion = new JButton("Déconnexion");
+        buttonDeconnexion.setFont(StyleUI.POLICE_BOUTON);
+        buttonDeconnexion.setForeground(Color.WHITE);
+        buttonDeconnexion.setBackground(StyleUI.MARINE);
         buttonDeconnexion.addActionListener(e -> {new Connexion().setVisible(true);
         dispose();});
 
@@ -94,7 +117,18 @@ public class PageAccueil extends JFrame {
         principale.add(panelGauche, BorderLayout.WEST);
 
         // --- Conteneur central ---
-        center = new JPanel(new BorderLayout());
+        center = new JPanel(new BorderLayout()) {
+            private final java.awt.Image logo = new ImageIcon(getClass().getResource("/images/logo global 2.0.jpg")).getImage();
+
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.08f));
+                g2.drawImage(logo, 0, 0, getWidth(), getHeight(), this);
+                g2.dispose();
+            }
+        };
         principale.add(center, BorderLayout.CENTER);
 
         setContentPane(principale);
