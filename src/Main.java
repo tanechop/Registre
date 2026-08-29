@@ -92,8 +92,6 @@ public class Main extends JFrame {
         champ7.setLineWrap(true);
         champ7.setWrapStyleWord(true);
         champ7.setBorder(BorderFactory.createLineBorder(StyleUI.GRIS_BORDURE, 1));
-        //JScrollPane scrollPane1 = new JScrollPane(champ7);
-        //champ7.setPreferredSize(new Dimension(100, 50));
         panel.add(champ7);
 
         panel.add(new JLabel("<html>Service sollicité <font color='red'>*</font> :</html>", SwingConstants.LEFT) {{
@@ -129,21 +127,65 @@ public class Main extends JFrame {
         bouton3.setFocusPainted(false);
         bouton3.setCursor(new Cursor(Cursor.HAND_CURSOR));
         bouton3.addActionListener(e -> {
-        dispose();});
+            dispose();
+        });
 
         bouton1.addActionListener(e -> {
+
+            // 1. Vérifier qu'aucun champ n'est vide
+            if (champ1.getText().trim().isEmpty() ||
+                    champ2.getText().trim().isEmpty() ||
+                    champ3.getText().trim().isEmpty() ||
+                    champ4.getText().trim().isEmpty() ||
+                    champ5.getText().trim().isEmpty() ||
+                    champ6.getText().trim().isEmpty() ||
+                    champ7.getText().trim().isEmpty() ||
+                    champ8.getText().trim().isEmpty()) {
+
+                JOptionPane.showMessageDialog(this,
+                        "Tous les champs sont obligatoires.",
+                        "Champ manquant", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            String nom = champ1.getText().trim();
+            String prenom = champ2.getText().trim();
+            String numCni = champ3.getText().trim();
+            String telephoneSaisi = champ4.getText().trim();
+            String motif = champ7.getText().trim();
+            String service = champ8.getText().trim();
+
+            // 2. Vérifier que le numéro de téléphone contient exactement 9 chiffres
+            if (!telephoneSaisi.matches("\\d{9}")) {
+                JOptionPane.showMessageDialog(this,
+                        "Le numéro de téléphone doit contenir exactement 9 chiffres.",
+                        "Téléphone invalide", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // 3. Vérifier que le N°CNI ne contient pas de caractères spéciaux
+            if (!numCni.matches("[a-zA-Z0-9]+")) {
+                JOptionPane.showMessageDialog(this,
+                        "Le N°CNI ne doit contenir que des lettres et des chiffres (pas de =,-,+,/ etc).",
+                        "N°CNI invalide", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             try {
-                String nom = champ1.getText();
-                String prenom = champ2.getText();
-                String numCni = champ3.getText();
-                int contact = Integer.parseInt(champ4.getText().trim());
+                int contact = Integer.parseInt(telephoneSaisi);
 
                 DateTimeFormatter fmt = DateTimeFormatter.ofPattern("HH:mm");
                 LocalDate today = LocalDate.now();
                 LocalDateTime heureArrivee = LocalTime.parse(champ5.getText().trim(), fmt).atDate(today);
                 LocalDateTime heureDepart = LocalTime.parse(champ6.getText().trim(), fmt).atDate(today);
-                String motif = champ7.getText();
-                String service = champ8.getText();
+
+                // 4. Vérifier que l'heure d'arrivée précède l'heure de départ
+                if (!heureArrivee.isBefore(heureDepart)) {
+                    JOptionPane.showMessageDialog(this,
+                            "L'heure d'arrivée doit être avant l'heure de départ.",
+                            "Heures invalides", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
 
                 Visiteur visiteur = new Visiteur(nom, prenom, contact, numCni);
                 VisiteurDAO visiteurDAO = new VisiteurDAO();
@@ -155,7 +197,7 @@ public class Main extends JFrame {
                     return;
                 }
 
-                int utilisateurIdPlaceholder = 1; // TODO: remplacer par l'id de l'utilisateur connect+�
+                int utilisateurIdPlaceholder = 1; // TODO: remplacer par l'id de l'utilisateur connecté
 
                 Visite visite = new Visite(motif, heureArrivee, heureDepart,
                         service, "", idVisiteur, utilisateurIdPlaceholder);
@@ -179,7 +221,7 @@ public class Main extends JFrame {
                 }
 
             } catch (NumberFormatException nfe) {
-                JOptionPane.showMessageDialog(this, "Le numéro de téléphone doit étre un nombre.",
+                JOptionPane.showMessageDialog(this, "Le numéro de téléphone doit être un nombre.",
                         "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
             } catch (DateTimeParseException dtpe) {
                 JOptionPane.showMessageDialog(this, "Heure invalide. Utilisez le format HH:mm (ex: 14:30).",
