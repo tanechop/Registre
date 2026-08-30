@@ -131,7 +131,7 @@ public class ModificationEregistrement extends JFrame {
         bouton2.setFocusPainted(false);
         bouton2.setCursor(new Cursor(Cursor.HAND_CURSOR));
         bouton1.addActionListener(e -> {
-            try {
+            /*try {
                 String nouveauNom = champ1.getText();
                 String nouveauPrenom = champ2.getText();
                 String nouveauNumCni = champ3.getText();
@@ -172,7 +172,112 @@ public class ModificationEregistrement extends JFrame {
             } catch (DateTimeParseException dtpe) {
                 JOptionPane.showMessageDialog(this, "Heure invalide. Utilisez le format HH:mm (ex: 14:30).",
                         "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
-            }
+            }*/
+
+            bouton1.addActionListener(event -> {
+                try {
+                    // ✅ Vérification des champs vides
+                    if (champ1.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(this,
+                                "Le nom est obligatoire.",
+                                "Champ manquant", JOptionPane.WARNING_MESSAGE);
+                        champ1.requestFocus();
+                        return;
+                    }
+                    if (champ2.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(this,
+                                "Le prénom est obligatoire.",
+                                "Champ manquant", JOptionPane.WARNING_MESSAGE);
+                        champ2.requestFocus();
+                        return;
+                    }
+                    if (champ3.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(this,
+                                "Le numéro CNI est obligatoire.",
+                                "Champ manquant", JOptionPane.WARNING_MESSAGE);
+                        champ3.requestFocus();
+                        return;
+                    }
+                    if (champ4.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(this,
+                                "Le numéro de téléphone est obligatoire.",
+                                "Champ manquant", JOptionPane.WARNING_MESSAGE);
+                        champ4.requestFocus();
+                        return;
+                    }
+                    if (champ5.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(this,
+                                "L'heure d'arrivée est obligatoire.",
+                                "Champ manquant", JOptionPane.WARNING_MESSAGE);
+                        champ5.requestFocus();
+                        return;
+                    }
+                    if (champ6.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(this,
+                                "L'heure de départ est obligatoire.",
+                                "Champ manquant", JOptionPane.WARNING_MESSAGE);
+                        champ6.requestFocus();
+                        return;
+                    }
+                    if (champ7.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(this,
+                                "Le motif est obligatoire.",
+                                "Champ manquant", JOptionPane.WARNING_MESSAGE);
+                        champ7.requestFocus();
+                        return;
+                    }
+                    if (champ8.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(this,
+                                "Le service est obligatoire.",
+                                "Champ manquant", JOptionPane.WARNING_MESSAGE);
+                        champ8.requestFocus();
+                        return;
+                    }
+
+                    // ✅ Tous les champs OK — on continue
+                    String nouveauNom = champ1.getText();
+                    String nouveauPrenom = champ2.getText();
+                    String nouveauNumCni = champ3.getText();
+                    int nouveauContact = Integer.parseInt(champ4.getText().trim());
+
+                    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("HH:mm");
+                    LocalDate today = LocalDate.now();
+                    LocalDateTime nouvelleHeureArrivee = LocalTime.parse(champ5.getText().trim(), fmt).atDate(today);
+                    LocalDateTime nouvelleHeureDepart = LocalTime.parse(champ6.getText().trim(), fmt).atDate(today);
+                    String nouveauMotif = champ7.getText();
+                    String nouveauService = champ8.getText();
+
+                    Visiteur visiteur = new Visiteur(nouveauNom, nouveauPrenom, nouveauContact, nouveauNumCni);
+                    visiteur.setIdVisiteur(idVisiteur);
+                    VisiteurDAO visiteurDAO = new VisiteurDAO();
+                    boolean visiteurOk = visiteurDAO.modifierVisiteur(visiteur);
+
+                    Visite visite = new Visite(nouveauMotif, nouvelleHeureArrivee, nouvelleHeureDepart,
+                            nouveauService, "", idVisiteur, 1);
+                    visite.setIdVisite(idVisite);
+                    VisiteDAO visiteDAO = new VisiteDAO();
+                    boolean visiteOk = visiteDAO.modifierVisite(visite);
+
+                    if (visiteurOk && visiteOk) {
+                        JOptionPane.showMessageDialog(this, "Modification enregistrée avec succès !");
+                        if (surModificationReussie != null) {
+                            surModificationReussie.run();
+                        }
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Erreur lors de la modification.",
+                                "Erreur", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                } catch (NumberFormatException nfe) {
+                    JOptionPane.showMessageDialog(this, "Le numéro de téléphone doit être un nombre.",
+                            "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+                } catch (DateTimeParseException dtpe) {
+                    JOptionPane.showMessageDialog(this, "Heure invalide. Utilisez le format HH:mm (ex: 14:30).",
+                            "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+
         });
 
         bouton2.addActionListener(e -> dispose());
