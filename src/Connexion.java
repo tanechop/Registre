@@ -103,7 +103,7 @@ public class Connexion extends JFrame {
                 String role = Authentification.seConnecter(username, password);
                 if(role!=null) {
                     if ("administrateur".equals(role)) {
-                        new GroupWare().setVisible(true);
+                        new GroupWare(username).setVisible(true);
                         dispose();
                     } else {
                         new PageAccueil(username).setVisible(true);

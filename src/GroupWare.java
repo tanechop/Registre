@@ -3,7 +3,7 @@ import java.awt.*;
 
 
 public class GroupWare extends JFrame{
-
+    private String username;
     private static ImageIcon chrgerIcone(String path, int largeur, int hauteur) {
         java.net.URL imgURL = GroupWare.class.getResource(path);
         if (imgURL != null) {
@@ -17,7 +17,8 @@ public class GroupWare extends JFrame{
         }
     }
 
-    public GroupWare() {
+    public GroupWare(String username) {
+        this.username = username;
         setTitle("Tableau de bord administrateur");
         setSize(550, 380);
         setLocationRelativeTo(null);
@@ -73,7 +74,7 @@ public class GroupWare extends JFrame{
         }
 
         btnLancer.addActionListener(e -> {
-            new PageAccueil("utilisateur").setVisible(true);
+            new PageAccueil(username).setVisible(true);
             dispose();
 
         });
@@ -90,6 +91,10 @@ public class GroupWare extends JFrame{
         add(titre, BorderLayout.NORTH);
         add(menu, BorderLayout.CENTER);
         setResizable(false);
+    }
+
+    public GroupWare() {
+        this("Test");
     }
     public static void main(String[] args){
         SwingUtilities.invokeLater(() -> new GroupWare().setVisible(true));
