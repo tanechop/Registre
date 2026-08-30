@@ -130,19 +130,63 @@ public class ModificationEregistrement extends JFrame {
         bouton2.setBorder(BorderFactory.createLineBorder(StyleUI.GRIS_BORDURE, 1));
         bouton2.setFocusPainted(false);
         bouton2.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         bouton1.addActionListener(e -> {
+
+            // 1. Vérifier qu'aucun champ n'est vide
+            if (champ1.getText().trim().isEmpty() ||
+                    champ2.getText().trim().isEmpty() ||
+                    champ3.getText().trim().isEmpty() ||
+                    champ4.getText().trim().isEmpty() ||
+                    champ5.getText().trim().isEmpty() ||
+                    champ6.getText().trim().isEmpty() ||
+                    champ7.getText().trim().isEmpty() ||
+                    champ8.getText().trim().isEmpty()) {
+
+                JOptionPane.showMessageDialog(this,
+                        "Tous les champs sont obligatoires.",
+                        "Champ manquant", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            String nouveauNom = champ1.getText().trim();
+            String nouveauPrenom = champ2.getText().trim();
+            String nouveauNumCni = champ3.getText().trim();
+            String telephoneSaisi = champ4.getText().trim();
+            String nouveauMotif = champ7.getText().trim();
+            String nouveauService = champ8.getText().trim();
+
+            // 2. Vérifier que le numéro de téléphone contient exactement 9 chiffres et commence par 6
+            if (!telephoneSaisi.matches("6\\d{8}")) {
+                JOptionPane.showMessageDialog(this,
+                        "Le numéro de téléphone doit contenir exactement 9 chiffres et commencer par 6.",
+                        "Téléphone invalide", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // 3. Vérifier que le N°CNI ne contient pas de caractères spéciaux
+            if (!nouveauNumCni.matches("[a-zA-Z0-9]+")) {
+                JOptionPane.showMessageDialog(this,
+                        "Le N°CNI ne doit contenir que des lettres et des chiffres (pas de =,-,+,/ etc).",
+                        "N°CNI invalide", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
             try {
-                String nouveauNom = champ1.getText();
-                String nouveauPrenom = champ2.getText();
-                String nouveauNumCni = champ3.getText();
-                int nouveauContact = Integer.parseInt(champ4.getText().trim());
+                int nouveauContact = Integer.parseInt(telephoneSaisi);
 
                 DateTimeFormatter fmt = DateTimeFormatter.ofPattern("HH:mm");
                 LocalDate today = LocalDate.now();
                 LocalDateTime nouvelleHeureArrivee = LocalTime.parse(champ5.getText().trim(), fmt).atDate(today);
                 LocalDateTime nouvelleHeureDepart = LocalTime.parse(champ6.getText().trim(), fmt).atDate(today);
-                String nouveauMotif = champ7.getText();
-                String nouveauService = champ8.getText();
+
+                // 4. Vérifier que l'heure d'arrivée précède l'heure de départ
+                if (!nouvelleHeureArrivee.isBefore(nouvelleHeureDepart)) {
+                    JOptionPane.showMessageDialog(this,
+                            "L'heure d'arrivée doit être avant l'heure de départ.",
+                            "Heures invalides", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
 
                 Visiteur visiteur = new Visiteur(nouveauNom, nouveauPrenom, nouveauContact, nouveauNumCni);
                 visiteur.setIdVisiteur(idVisiteur);

@@ -155,10 +155,10 @@ public class Main extends JFrame {
             String motif = champ7.getText().trim();
             String service = champ8.getText().trim();
 
-            // 2. Vérifier que le numéro de téléphone contient exactement 9 chiffres
-            if (!telephoneSaisi.matches("\\d{9}")) {
+            // 2. Vérifier que le numéro de téléphone contient exactement 9 chiffres et commence par 6
+            if (!telephoneSaisi.matches("6\\d{8}")) {
                 JOptionPane.showMessageDialog(this,
-                        "Le numéro de téléphone doit contenir exactement 9 chiffres.",
+                        "Le numéro de téléphone doit contenir exactement 9 chiffres et commencer par 6.",
                         "Téléphone invalide", JOptionPane.WARNING_MESSAGE);
                 return;
             }
