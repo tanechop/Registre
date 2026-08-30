@@ -483,9 +483,27 @@ public class PageAccueil extends JFrame {
                     .format(new java.util.Date());
             String nomFichier = "export_visiteurs_" + dateHeure + ".pdf";
 
+            // ✅ Fenêtre pour choisir l'emplacement
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setSelectedFile(new java.io.File(nomFichier));
+            fileChooser.setFileFilter(
+                    new javax.swing.filechooser.FileNameExtensionFilter(
+                            "Fichiers PDF (*.pdf)", "pdf"));
+            fileChooser.setDialogTitle("Choisir l'emplacement du fichier PDF");
+
+            int choix = fileChooser.showSaveDialog(this);
+            if (choix != JFileChooser.APPROVE_OPTION) {
+                return;
+            }
+
+            String cheminFichier = fileChooser.getSelectedFile().getAbsolutePath();
+            if (!cheminFichier.endsWith(".pdf")) {
+                cheminFichier += ".pdf";
+            }
+
             Document document = new Document(PageSize.A4.rotate());
             PdfWriter.getInstance(document,
-                    new FileOutputStream(nomFichier));
+                    new FileOutputStream(cheminFichier));
             document.open();
 
             // ✅ 2 — Titre avant le tableau
@@ -548,7 +566,7 @@ public class PageAccueil extends JFrame {
             document.close();
 
             JOptionPane.showMessageDialog(this,
-                    "Export PDF réussi : " + nomFichier);
+                    "Export PDF réussi : " + cheminFichier);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,
