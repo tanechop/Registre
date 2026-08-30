@@ -22,7 +22,7 @@ public class UserManagementFrame extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        setTitle("Page accueil");
+        setTitle("Gestion des comptes");
         setSize(1000,500);
 
         titre= new JLabel("Gestion des comptes", SwingConstants.CENTER);

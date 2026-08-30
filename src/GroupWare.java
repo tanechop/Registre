@@ -18,7 +18,7 @@ public class GroupWare extends JFrame{
     }
 
     public GroupWare() {
-        setTitle("Menu administrateur");
+        setTitle("Tableau de bord administrateur");
         setSize(550, 380);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
