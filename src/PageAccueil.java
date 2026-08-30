@@ -52,7 +52,7 @@ public class PageAccueil extends JFrame {
         ImageIcon iconRedim = new ImageIcon(imageRedim);
         JLabel labelImage = new JLabel(iconRedim);
 
-        JLabel titre = new JLabel(" GLOBAL SERVICES S.A");
+        JLabel titre = new JLabel(" GLOBAL SERVICES S.A.");
         titre.setFont(new java.awt.Font("Cooper Black", java.awt.Font.BOLD, 48));
         titre.setForeground(StyleUI.MARINE);
 
