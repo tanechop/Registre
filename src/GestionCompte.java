@@ -47,6 +47,9 @@ public class GestionCompte {
     }
 
     public void modifierCompte(String ancienNom, String nouveauNom, String nouveauRole) throws SQLException{
+        if (!ancienNom.equals(nouveauNom) && existeCompte(nouveauNom)) {
+            throw new SQLException("Ce nom d'utilisateur est déjà utilisé.");
+        }
         String requete = "UPDATE utilisateur SET nom_d_utilisateur = ?, role = ? WHERE nom_d_utilisateur = ?";
         try(Connection connexion = ConnexionBD.getConnection();
             PreparedStatement statement = connexion.prepareStatement(requete)) {
@@ -54,6 +57,17 @@ public class GestionCompte {
             statement.setString(2, ancienNom);
             statement.setString(3, nouveauRole);
             statement.executeUpdate();
+        }
+    }
+
+    public boolean existeCompte(String username) throws SQLException {
+        String requete = "SELECT 1 FROM utilisateur WHERE nom_d_utilisateur = ?";
+        try (Connection connexion = ConnexionBD.getConnection();
+             PreparedStatement statement = connexion.prepareStatement(requete)) {
+            statement.setString(1, username);
+            try (ResultSet resultat = statement.executeQuery()) {
+                return resultat.next();
+            }
         }
     }
 }

@@ -57,8 +57,26 @@ public class Connexion extends JFrame {
         passeword.setFont(new Font("BOOK Antiqua",Font.BOLD,16));
         centre.add(passeword,gbc);
         gbc.gridx = 1; gbc.gridy = 1; gbc.weightx = 0.7;
-        champ2 = new JPasswordField();//cree un interface de champ qui vas contenir le mot de passe saisir et le cripter
-        centre.add(champ2,gbc);//ajouter le champ au bloc ou panel (centre)
+        JPanel panelMotDePasse = new JPanel(new BorderLayout());
+        champ2 = new JPasswordField();
+        panelMotDePasse.add(champ2, BorderLayout.CENTER);
+
+        JButton boutonOeil = new JButton("👁");
+        boutonOeil.setFocusPainted(false);
+        boutonOeil.setBorderPainted(false);
+        boutonOeil.setContentAreaFilled(false);
+        boutonOeil.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        final char echoCharOriginal = champ2.getEchoChar();
+        boutonOeil.addActionListener(e -> {
+            if (champ2.getEchoChar() == 0) {
+                champ2.setEchoChar(echoCharOriginal);
+            } else {
+                champ2.setEchoChar((char) 0);
+            }
+        });
+        panelMotDePasse.add(boutonOeil, BorderLayout.EAST);
+
+        centre.add(panelMotDePasse, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 2;

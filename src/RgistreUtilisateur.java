@@ -56,8 +56,26 @@ public class RgistreUtilisateur extends JFrame {
         passeword.setFont(StyleUI.POLICE_LABEL);
         centre.add(passeword,gbc);
         gbc.gridx = 1; gbc.gridy = 1; gbc.weightx = 0.7;
-        motdepasse = new JPasswordField();//cree un interface de champ qui vas contenir le mot de passe saisir et le cripter
-        centre.add(motdepasse,gbc);
+        JPanel panelMotDePasse = new JPanel(new BorderLayout());
+        motdepasse = new JPasswordField();
+        panelMotDePasse.add(motdepasse, BorderLayout.CENTER);
+
+        JButton boutonOeil = new JButton("👁");
+        boutonOeil.setFocusPainted(false);
+        boutonOeil.setBorderPainted(false);
+        boutonOeil.setContentAreaFilled(false);
+        boutonOeil.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        final char echoCharOriginal = motdepasse.getEchoChar();
+        boutonOeil.addActionListener(e -> {
+            if (motdepasse.getEchoChar() == 0) {
+                motdepasse.setEchoChar(echoCharOriginal);
+            } else {
+                motdepasse.setEchoChar((char) 0);
+            }
+        });
+        panelMotDePasse.add(boutonOeil, BorderLayout.EAST);
+
+        centre.add(panelMotDePasse, gbc);
 
         // --- Ligne 2 : Choix du Rôle (Boutons Radio) ---
         gbc.gridx = 0; gbc.gridy = 2; gbc.weightx = 0.3;
@@ -135,6 +153,10 @@ public class RgistreUtilisateur extends JFrame {
             }
 
             try {
+                if (gestionCompte.existeCompte(username)) {
+                    JOptionPane.showMessageDialog(this, "Ce nom d'utilisateur est déjà utilisé.");
+                    return;
+                }
                 gestionCompte.creerCompte(username, password, role, question, rep);
                 JOptionPane.showMessageDialog(this, "Compte créé avec succès.");
                 dispose();

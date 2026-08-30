@@ -141,8 +141,22 @@ public class MotDePasseOublie extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 0;
+        JPanel panelNouveau = new JPanel(new BorderLayout());
         champNouveauMotDePasse = new JPasswordField(15);
-        panel.add(champNouveauMotDePasse, gbc);
+        panelNouveau.add(champNouveauMotDePasse, BorderLayout.CENTER);
+
+        JButton boutonOeil1 = new JButton("👁");
+        boutonOeil1.setFocusPainted(false);
+        boutonOeil1.setBorderPainted(false);
+        boutonOeil1.setContentAreaFilled(false);
+        boutonOeil1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        final char echo1 = champNouveauMotDePasse.getEchoChar();
+        boutonOeil1.addActionListener(e -> {
+            champNouveauMotDePasse.setEchoChar(champNouveauMotDePasse.getEchoChar() == 0 ? echo1 : (char) 0);
+        });
+        panelNouveau.add(boutonOeil1, BorderLayout.EAST);
+
+        panel.add(panelNouveau, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -152,8 +166,22 @@ public class MotDePasseOublie extends JFrame {
 
         gbc.gridx = 1;
         gbc.gridy = 1;
+        JPanel panelConfirmation = new JPanel(new BorderLayout());
         champConfirmation = new JPasswordField(15);
-        panel.add(champConfirmation, gbc);
+        panelConfirmation.add(champConfirmation, BorderLayout.CENTER);
+
+        JButton boutonOeil2 = new JButton("👁");
+        boutonOeil2.setFocusPainted(false);
+        boutonOeil2.setBorderPainted(false);
+        boutonOeil2.setContentAreaFilled(false);
+        boutonOeil2.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        final char echo2 = champConfirmation.getEchoChar();
+        boutonOeil2.addActionListener(e -> {
+            champConfirmation.setEchoChar(champConfirmation.getEchoChar() == 0 ? echo2 : (char) 0);
+        });
+        panelConfirmation.add(boutonOeil2, BorderLayout.EAST);
+
+        panel.add(panelConfirmation, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 2;
