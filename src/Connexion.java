@@ -88,7 +88,7 @@ public class Connexion extends JFrame {
                         new GroupWare().setVisible(true);
                         dispose();
                     } else {
-                        new PageAccueil("utilisateurtest").setVisible(true);
+                        new PageAccueil(username).setVisible(true);
                         dispose();
                     }
                 }else {
