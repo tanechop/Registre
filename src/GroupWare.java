@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
+
 public class GroupWare extends JFrame{
 
     private static ImageIcon chrgerIcone(String path, int largeur, int hauteur) {
@@ -72,7 +73,7 @@ public class GroupWare extends JFrame{
         }
 
         btnLancer.addActionListener(e -> {
-            new PageAccueil("UtilisateurTest").setVisible(true);
+            new PageAccueil("utilisateur").setVisible(true);
             dispose();
 
         });

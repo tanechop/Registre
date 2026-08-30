@@ -26,7 +26,7 @@ public class PageAccueil extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
-        setTitle("Page Accueil - Connecté : " + user);
+        setTitle("Page Accueil - Connecté : " + user );
         setSize(1400, 800);
         setLocationRelativeTo(null);
 
@@ -34,11 +34,35 @@ public class PageAccueil extends JFrame {
 
         topPanel = new JPanel(new BorderLayout());
 
-        JLabel titre = new JLabel("Accueil", SwingConstants.CENTER);
+        /*JLabel titre = new JLabel("Accueil", SwingConstants.CENTER);
+
         titre.setFont(new java.awt.Font("Cooper Black", java.awt.Font.BOLD, 48));
         titre.setForeground(StyleUI.MARINE);
         titre.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        topPanel.add(titre, BorderLayout.CENTER);
+        topPanel.add(titre, BorderLayout.CENTER);*/
+
+        int largeurImage = 90;
+        int hauteurImage = 90;
+
+        ImageIcon iconOriginal = new ImageIcon(
+                getClass().getResource("/images/logo global 2.0.jpg"));
+        java.awt.Image imageRedim = iconOriginal.getImage()
+                .getScaledInstance(largeurImage, hauteurImage,
+                        java.awt.Image.SCALE_SMOOTH);
+        ImageIcon iconRedim = new ImageIcon(imageRedim);
+        JLabel labelImage = new JLabel(iconRedim);
+
+        JLabel titre = new JLabel(" GLOBAL SERVICES S.A");
+        titre.setFont(new java.awt.Font("Cooper Black", java.awt.Font.BOLD, 48));
+        titre.setForeground(StyleUI.MARINE);
+
+        JPanel titrePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        titrePanel.setOpaque(false);
+        titrePanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+        titrePanel.add(labelImage);
+        titrePanel.add(titre);
+
+        topPanel.add(titrePanel, BorderLayout.CENTER);
 
         recherchePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         champNom = new JTextField(10);
@@ -170,28 +194,70 @@ public class PageAccueil extends JFrame {
 
     public void afficherHistorique() {
         table = new JTable(new DefaultTableModel(
-                new Object[]{"id_Visites", "Nom", "Prénom", "Contact", "Num_CNI", "Motif", "Date_visite",
-                        "Heure_arrivee", "Heure_depart",
-                        "Service", "Visiteurs_id", "Utilisateur_id"}, 0
+                new Object[]{"id_Visites", "Nom", "Prénom", "Contact", "Num CNI", "Motif", "Date de visite",
+                        "Heure d'arrivee", "Heure de depart",
+                        "Service","visiteur_id" , "utilisateur_id"}, 0
         ));
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        appliquerStyleTableau(table); // ← AJOUTE ICI
 
-        table.setShowGrid(true);
+
+        /*table.setShowGrid(true);
         table.setGridColor(Color.GRAY);
         JTableHeader header = table.getTableHeader();
         header.setBackground(new Color(220, 240, 220));
         header.setForeground(new Color(34, 85, 50));
-        header.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 14));
+        header.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 14));*/
 
-        table.getColumnModel().removeColumn(table.getColumnModel().getColumn(0));
+
 
         JScrollPane scrollPane = new JScrollPane(table);
 
         chargerVisiteur(table, null, null);
+        ajusterLargeursColonnes(table);
+        table.getColumnModel().removeColumn(table.getColumnModel().getColumn(11));
+        table.getColumnModel().removeColumn(table.getColumnModel().getColumn(10));
+        //table.getColumnModel().removeColumn(table.getColumnModel().getColumn(0));
 
+        table.getColumnModel().removeColumn(table.getColumnModel().getColumn(0));
         center.removeAll();
         center.add(scrollPane, BorderLayout.CENTER);
         center.revalidate();
         center.repaint();
+    }
+
+    private void ajusterLargeursColonnes(JTable table) {
+        // Boucle sur chaque colonne du tableau
+        for (int col = 0; col < table.getColumnCount(); col++) {
+
+            // Variable qui stocke la largeur maximale trouvée
+            int largeurMax = 0;
+
+            // Récupère l'objet colonne (contient titre, largeur...)
+            javax.swing.table.TableColumn column =
+                    table.getColumnModel().getColumn(col);
+
+            // Mesure la largeur du TITRE de la colonne (header)
+            Component headerComp = table.getTableHeader()
+                    .getDefaultRenderer()
+                    .getTableCellRendererComponent(
+                            table,
+                            column.getHeaderValue(),
+                            false, false, 0, col);
+            largeurMax = Math.max(largeurMax,
+                    headerComp.getPreferredSize().width);
+
+            // Mesure la largeur de chaque CELLULE de cette colonne
+            for (int row = 0; row < table.getRowCount(); row++) {
+                Component cellComp = table.prepareRenderer(
+                        table.getCellRenderer(row, col), row, col);
+                largeurMax = Math.max(largeurMax,
+                        cellComp.getPreferredSize().width);
+            }
+
+            // Applique la largeur max + 15px de marge
+            column.setPreferredWidth(largeurMax + 15);
+        }
     }
 
     public void rechercherParNomEtDate() {
@@ -199,19 +265,32 @@ public class PageAccueil extends JFrame {
         String date = champDate.getText().trim();
 
         table = new JTable(new DefaultTableModel(
-                new Object[]{"id_Visites", "Nom", "Prénom", "Contact", "Num_CNI", "Motif", "Date_visite",
-                        "Heure_arrivee", "Heure_depart",
-                        "Service", "Visiteurs_id", "Utilisateur_id"}, 0
-        ));
+                new Object[]{"id_Visites", "Nom", "Prénom", "Contact", "Num CNI", "Motif", "Date de visite",
+                        "Heure d'arrivee", "Heure de depart",
+                        "Service","visiteur_id" , "utilisateur_id"}, 0
 
-        table.setShowGrid(true);
-        table.setGridColor(Color.GRAY);
-        table.getColumnModel().removeColumn(table.getColumnModel().getColumn(0));
+        )
+        );
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+
+
+        //table.setShowGrid(true);
+        //table.setGridColor(Color.GRAY);
+
 
         JScrollPane scrollPane = new JScrollPane(table);
+        appliquerStyleTableau(table); // ← AJOUTE ICI
+
 
         chargerVisiteur(table, nom.isEmpty() ? null : nom, date.isEmpty() ? null : date);
+        // 2. Ajuster ensuite
+        ajusterLargeursColonnes(table);
+        table.getColumnModel().removeColumn(table.getColumnModel().getColumn(11));
+        table.getColumnModel().removeColumn(table.getColumnModel().getColumn(10));
+        //table.getColumnModel().removeColumn(table.getColumnModel().getColumn(0));
 
+        table.getColumnModel().removeColumn(table.getColumnModel().getColumn(0));
         center.removeAll();
         center.add(scrollPane, BorderLayout.CENTER);
         center.revalidate();
@@ -225,7 +304,7 @@ public class PageAccueil extends JFrame {
         String sql = "SELECT vi.id_Visites, v.nom, v.prenom, v.contact, v.num_CNI, " +
                 "vi.motif, vi.date_visite, vi.heure_de_depart, vi.heure_d_arrivee, " +
                 "vi.service, vi.Visiteurs_id_Visiteurs, vi.Utilisateur_id_Utilisateur " +
-                "FROM visiteurs v LEFT JOIN visites vi ON v.id_visiteurs = vi.Visiteurs_id_Visiteurs";
+                "FROM visiteurs v INNER JOIN visites vi ON v.id_visiteurs = vi.Visiteurs_id_Visiteurs";
 
         if (nom != null && date != null) {
             sql += " WHERE v.nom LIKE ? AND DATE(vi.date_visite) = ?";
@@ -262,8 +341,9 @@ public class PageAccueil extends JFrame {
                             rs.getTime("heure_d_arrivee"),
                             rs.getTime("heure_de_depart"),
                             rs.getString("service"),
-                            rs.getInt("Visiteurs_id_Visiteurs"),
-                            rs.getInt("Utilisateur_id_Utilisateur"),
+                            rs.getObject("Visiteurs_id_Visiteurs"),    // ✅ AJOUTÉ
+                            rs.getObject("Utilisateur_id_Utilisateur") // ✅ AJOUTÉ
+
                     });
                 }
             }
@@ -272,6 +352,58 @@ public class PageAccueil extends JFrame {
             JOptionPane.showMessageDialog(this, "Erreur : " + e.getMessage());
         }
     }
+    // ... fin de chargerVisiteur() ...
+
+    private void appliquerStyleTableau(JTable table) {
+
+
+        table.setRowHeight(30);
+        table.setShowGrid(true);
+        table.setGridColor(new Color(180, 190, 220));
+
+        table.setRowSelectionAllowed(true);
+        table.setColumnSelectionAllowed(false);        // ← interdit la sélection de cellule
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);// ← une seule ligne à la fois
+        table.setFocusable(false); // ← supprime la bordure de focus sur la cellule
+
+
+
+        JTableHeader header = table.getTableHeader();
+        header.setBackground(new Color(22, 73, 227));
+        header.setForeground(Color.WHITE);
+        header.setFont(new java.awt.Font("BOOK ANTIQUA", java.awt.Font.BOLD, 14));
+        header.setPreferredSize(new Dimension(0, 40));
+
+        table.setSelectionBackground(new Color(178, 239, 172));
+        table.setSelectionForeground(Color.BLACK);
+        table.setDefaultEditor(Object.class, null);
+
+        table.setDefaultRenderer(Object.class,
+                new javax.swing.table.DefaultTableCellRenderer() {
+                    @Override
+                    public Component getTableCellRendererComponent(
+                            JTable t, Object value, boolean isSelected,
+                            boolean hasFocus, int row, int col) {
+
+                        Component c = super.getTableCellRendererComponent(
+                                t, value, isSelected, hasFocus, row, col);
+
+                        if (!isSelected) {
+                            if (row % 2 == 0) {
+                                c.setBackground(Color.WHITE);
+                            } else {
+                                c.setBackground(new Color(214, 220, 240));
+                            }
+                        }
+
+                        ((JLabel) c).setHorizontalAlignment(SwingConstants.CENTER);
+                        return c;
+                    }
+                }
+        );
+    }
+
+// ... suite de ta classe ...
 
     private void modifierLigneSelectionnee() {
         if (table == null || table.getSelectedRow() == -1) {
@@ -318,7 +450,7 @@ public class PageAccueil extends JFrame {
     }
 
     private void exporterPDF() {
-        try {
+       /* try {
             Document document = new Document(PageSize.A4.rotate());
             PdfWriter.getInstance(document, new FileOutputStream("export_visiteurs.pdf"));
             document.open();
@@ -343,6 +475,102 @@ public class PageAccueil extends JFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erreur export : " + e.getMessage());
+        }*/
+
+        try {
+            // ✅ 1 — Nom du fichier avec date et heure pour être unique
+            String dateHeure = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss")
+                    .format(new java.util.Date());
+            String nomFichier = "export_visiteurs_" + dateHeure + ".pdf";
+
+            // ✅ Fenêtre pour choisir l'emplacement
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setSelectedFile(new java.io.File(nomFichier));
+            fileChooser.setFileFilter(
+                    new javax.swing.filechooser.FileNameExtensionFilter(
+                            "Fichiers PDF (*.pdf)", "pdf"));
+            fileChooser.setDialogTitle("Choisir l'emplacement du fichier PDF");
+
+            int choix = fileChooser.showSaveDialog(this);
+            if (choix != JFileChooser.APPROVE_OPTION) {
+                return;
+            }
+
+            String cheminFichier = fileChooser.getSelectedFile().getAbsolutePath();
+            if (!cheminFichier.endsWith(".pdf")) {
+                cheminFichier += ".pdf";
+            }
+
+            Document document = new Document(PageSize.A4.rotate());
+            PdfWriter.getInstance(document,
+                    new FileOutputStream(cheminFichier));
+            document.open();
+
+            // ✅ 2 — Titre avant le tableau
+            com.itextpdf.text.Font fontTitre = new com.itextpdf.text.Font(
+                    com.itextpdf.text.Font.FontFamily.HELVETICA,
+                    18,
+                    com.itextpdf.text.Font.BOLD,
+                    new BaseColor(22, 73, 227) // bleu comme ton header
+            );
+            Paragraph titre = new Paragraph(
+                    "Liste des Visiteurs — " +
+                            new java.text.SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date()),
+                    fontTitre
+            );
+            titre.setAlignment(Element.ALIGN_CENTER);
+            titre.setSpacingAfter(20); // espace entre le titre et le tableau
+            document.add(titre);
+
+            // ✅ 3 — Tableau des données
+            PdfPTable pdfTable = new PdfPTable(table.getColumnCount());
+            pdfTable.setWidthPercentage(100);
+
+            // ✅ 4 — Header du tableau en bleu
+            for (int col = 0; col < table.getColumnCount(); col++) {
+                PdfPCell cellHeader = new PdfPCell(
+                        new Phrase(table.getColumnName(col),
+                                new com.itextpdf.text.Font(
+                                        com.itextpdf.text.Font.FontFamily.HELVETICA,
+                                        11,
+                                        com.itextpdf.text.Font.BOLD,
+                                        BaseColor.WHITE
+                                )
+                        )
+                );
+                cellHeader.setBackgroundColor(new BaseColor(22, 73, 227));
+                cellHeader.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cellHeader.setPadding(8);
+                pdfTable.addCell(cellHeader);
+            }
+
+            // ✅ 5 — Lignes avec alternance de couleur
+            for (int rows = 0; rows < table.getRowCount(); rows++) {
+                for (int cols = 0; cols < table.getColumnCount(); cols++) {
+                    Object value = table.getValueAt(rows, cols);
+                    PdfPCell cell = new PdfPCell(
+                            new Phrase(value == null ? "" : value.toString()));
+                    cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cell.setPadding(6);
+                    cell.setBorderWidth(0.5f);
+
+                    // Alternance blanc / bleu clair
+                    if (rows % 2 != 0) {
+                        cell.setBackgroundColor(new BaseColor(214, 220, 240));
+                    }
+                    pdfTable.addCell(cell);
+                }
+            }
+
+            document.add(pdfTable);
+            document.close();
+
+            JOptionPane.showMessageDialog(this,
+                    "Export PDF réussi : " + cheminFichier);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                    "Erreur export : " + e.getMessage());
         }
     }
 
