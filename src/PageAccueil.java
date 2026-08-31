@@ -45,7 +45,7 @@ public class PageAccueil extends JFrame {
         int hauteurImage = 90;
 
         ImageIcon iconOriginal = new ImageIcon(
-                getClass().getResource("/images/logo global 2.0.jpg"));
+                getClass().getResource("/images/logo global 2.1.jpeg"));
         java.awt.Image imageRedim = iconOriginal.getImage()
                 .getScaledInstance(largeurImage, hauteurImage,
                         java.awt.Image.SCALE_SMOOTH);
@@ -53,7 +53,7 @@ public class PageAccueil extends JFrame {
         JLabel labelImage = new JLabel(iconRedim);
 
         JLabel titre = new JLabel(" GLOBAL SERVICES S.A.");
-        titre.setFont(new java.awt.Font("Cooper Black", java.awt.Font.BOLD, 48));
+        titre.setFont(new java.awt.Font("Cooper Black", java.awt.Font.BOLD, 40));
         titre.setForeground(StyleUI.MARINE);
 
         JPanel titrePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));

@@ -206,7 +206,7 @@ public class ModificationEregistrement extends JFrame {
 
                 if (!nouveauNumCni.matches("[a-zA-Z0-9]+")) {
                     JOptionPane.showMessageDialog(this,
-                            "Le N°CNI ne doit contenir que des lettres et des chiffres (pas de =,-,+,/ etc).",
+                            "Le N°CNI ne doit contenir que des lettres et des chiffres (pas de caractères spéciaux).",
                             "N°CNI invalide", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
