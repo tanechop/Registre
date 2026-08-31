@@ -151,6 +151,7 @@ public class PageAccueil extends JFrame {
         JButton btnSupprimer = new JButton("Supprimer");
         btnSupprimer.setBackground(new Color(255, 99, 71)); // rouge doux
         btnSupprimer.setForeground(Color.WHITE);
+        btnSupprimer.setFont(StyleUI.POLICE_BOUTON);
 
 
         btnSupprimer.addActionListener(e -> {
