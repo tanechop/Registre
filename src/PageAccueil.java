@@ -148,9 +148,34 @@ public class PageAccueil extends JFrame {
             dispose();
         });
 
+        JButton btnSupprimer = new JButton("Supprimer");
+        btnSupprimer.setBackground(new Color(255, 99, 71)); // rouge doux
+        btnSupprimer.setForeground(Color.WHITE);
+
+
+        btnSupprimer.addActionListener(e -> {
+            int ligne = table.getSelectedRow();
+            if (ligne != -1) {
+                //  On récupère le nom dans la colonne correspondante
+                String nom = table.getValueAt(ligne, 0).toString(); // colonne 0 = Nom
+
+                // Supprimer dans la base
+                supprimerParNom(nom);
+
+                // Supprimer dans l’historique (tableau affiché)
+                ((DefaultTableModel) table.getModel()).removeRow(ligne);
+
+                JOptionPane.showMessageDialog(this, "Le nom '" + nom + "' a été supprimé !");
+            } else {
+                JOptionPane.showMessageDialog(this, "Sélectionnez un nom à supprimer.");
+            }
+        });
+
+
         gbc.gridy = 0; panelGauche.add(buttonHistorique, gbc);
         gbc.gridy = 1; panelGauche.add(buttonEnregistrer, gbc);
         gbc.gridy = 2; panelGauche.add(buttonDeconnexion, gbc);
+        gbc.gridy = 3; panelGauche.add(btnSupprimer, gbc );
 
         principale.add(panelGauche, BorderLayout.WEST);
 
@@ -170,6 +195,30 @@ public class PageAccueil extends JFrame {
 
         setContentPane(principale);
     }
+
+
+    private void supprimerParNom(String nom) {
+        try (Connection conn = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/visitors_db", "root", "")) {
+
+            // Supprimer d’abord toutes les visites liées au visiteur
+            String sqlVisites = "DELETE FROM visites WHERE Visiteurs_id_Visiteurs IN " +
+                    "(SELECT id_Visiteurs FROM visiteurs WHERE Nom=?)";
+            PreparedStatement ps1 = conn.prepareStatement(sqlVisites);
+            ps1.setString(1, nom);
+            ps1.executeUpdate();
+
+            //  Supprimer ensuite le visiteur lui-même
+            String sqlVisiteur = "DELETE FROM visiteurs WHERE Nom=?";
+            PreparedStatement ps2 = conn.prepareStatement(sqlVisiteur);
+            ps2.setString(1, nom);
+            ps2.executeUpdate();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erreur : " + ex.getMessage());
+        }
+    }
+
 
     public static boolean verifierUtilisateur(String username, String password) {
         String sql = "SELECT * FROM utilisateur WHERE nom_d_utilisateur=? AND mot_de_passe=?";
@@ -478,12 +527,12 @@ public class PageAccueil extends JFrame {
         }*/
 
         try {
-            // ✅ 1 — Nom du fichier avec date et heure pour être unique
+            //  1 — Nom du fichier avec date et heure pour être unique
             String dateHeure = new java.text.SimpleDateFormat("yyyyMMdd_HHmmss")
                     .format(new java.util.Date());
             String nomFichier = "export_visiteurs_" + dateHeure + ".pdf";
 
-            // ✅ Fenêtre pour choisir l'emplacement
+            // Fenêtre pour choisir l'emplacement
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setSelectedFile(new java.io.File(nomFichier));
             fileChooser.setFileFilter(
