@@ -42,7 +42,7 @@ CREATE TABLE `utilisateur` (
 
 CREATE TABLE `visites` (
   `id_Visites` int(11) NOT NULL,
-  `motif` varchar(45) DEFAULT NULL,
+  `motif` TEXT DEFAULT NULL,
   `date_visite` datetime(3) DEFAULT NULL,
   `heure_de_depart` time DEFAULT NULL,
   `heure_d_arrivee` time DEFAULT NULL,
